@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aa000000" >
+
+    <LinearLayout
+        android:id="@+id/PreferencesScreen_contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/m10"
+        android:background="@drawable/quote_border_pink"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/text_quotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m3"
+            android:text="@string/prefs_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:typeface="serif" />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="false" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/m5"
+                android:layout_marginLeft="@dimen/m20"
+                android:layout_marginRight="@dimen/m20"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/m3" >
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#dddddd" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/m5"
+                    android:text="@string/theme_chooser"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/PreferencesScreen_themeRadioPink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/theme_pink"
+                        android:textStyle="italic" />
+
+                    <RadioButton
+                        android:id="@+id/PreferencesScreen_themeRadioWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_white"
+                        android:textStyle="italic" />
+
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/View01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#dddddd" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/m5"
+                    android:text="@string/default_language"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/PreferencesScreen_languageRadioRussian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/language_rus"
+                        android:textStyle="italic" />
+
+                    <RadioButton
+                        android:id="@+id/PreferencesScreen_languageRadioEnglish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/language_eng"
+                        android:textStyle="italic" />
+
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/View02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#dddddd" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/m5"
+                    android:text="@string/daily_screen_title"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/PreferencesScreen_dailyCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/daily_quote"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/PreferencesScreen_moreButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/more_title" />
+
+            <Button
+                android:id="@+id/WelcomeScreen_startButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/rate_app" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

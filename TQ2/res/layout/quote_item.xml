@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DailyQuote_contentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/quote_border_pink"
+    android:gravity="right|center"
+    android:minWidth="200dp"
+    android:orientation="vertical"
+    android:padding="@dimen/m3" >
+
+    <TextView
+        android:id="@+id/DailyQuote_quoteText"
+        style="@style/text_quotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/m3"
+        android:layout_marginRight="@dimen/m3"
+        android:layout_marginTop="@dimen/m3"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/m2"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/DailyQuote_shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/m5"
+                android:layout_marginTop="@dimen/m1"
+                android:src="@android:drawable/ic_menu_share" />
+
+        </LinearLayout>
+
+        <RatingBar
+            android:id="@+id/DailyQuote_ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:numStars="@integer/i3" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/DailyQuote_showTitle"
+        style="@style/text_titles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m3"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+</LinearLayout>
