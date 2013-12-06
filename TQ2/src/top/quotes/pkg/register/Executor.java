@@ -11,7 +11,7 @@ import top.quotes.pkg.entity.User;
 public class Executor {
 
 	private Gson gson = new Gson();
-	private final static String url = "";
+	private final static String url = "eagleclub.meximas.com/userTopQuotes/";
 
 	public void sendUSerInfo(User user) {
 		try {
