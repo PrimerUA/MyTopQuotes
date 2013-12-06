@@ -39,6 +39,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
+import com.ivengo.adv.AdvView;
 
 public class MainScreen extends SherlockFragmentActivity {
 
@@ -49,6 +50,9 @@ public class MainScreen extends SherlockFragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mShowsTitles;
+	
+	private AdvView advView;
+	
 	private AdView adView;
 
 	private static int selectedItem;
@@ -73,6 +77,9 @@ public class MainScreen extends SherlockFragmentActivity {
 		getSupportFragmentManager().beginTransaction()
 				.add(R.id.content_frame, new MainFragment()).commit();
 
+		advView = AdvView.create(this, getString(R.string.ivengo_publisher_id));
+		advView.showBanner();
+		
 		adView = new AdView(this, AdSize.SMART_BANNER,
 				getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
@@ -304,6 +311,12 @@ public class MainScreen extends SherlockFragmentActivity {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		advView.dismiss();
 	}
 
 }

@@ -4,6 +4,7 @@
     <string name="app_name">Top Quotes</string>
     <string name="app_market_url">https://play.google.com/store/apps/details?id=top.quotes.pkg</string>
     <string name="admob_publisher_id">a1500d45bf6f676</string>
+    <string name="ivengo_publisher_id">aj6m6dylrygc</string>
     <string name="menu_label">Меню</string>
     <string name="fragment_stream">Поток цитат</string>
     <string name="fragment_quiz">Викторина</string>
@@ -158,6 +159,6 @@
     <string name="google_connected">Авторизация выполнена</string>
     <string name="google_disconnected">Деавторизация выполнена</string>
     <string name="login_text">Нажмите Вход для продолжения</string>
-    <string name="logout_text">Выход</string>
+    <string name="logout_text">Выход из Google+</string>
 
 </resources>

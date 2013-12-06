@@ -154,6 +154,6 @@
     <string name="google_connected">Login complete</string>
     <string name="google_disconnected">Logout complete</string>
     <string name="login_text">Click Sign in to start</string>
-    <string name="logout_text">Log Out</string>
+    <string name="logout_text">Log Out from Google+</string>
 
 </resources>
