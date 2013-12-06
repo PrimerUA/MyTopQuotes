@@ -23,7 +23,7 @@ public class WelcomeScreen extends Activity {
 	private void initScreen() {
 		startButton = (Button) findViewById(R.id.WelcomeScreen_startButton);
 		
-		startButton.setOnClickListener(new OnClickListener() {
+	startButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

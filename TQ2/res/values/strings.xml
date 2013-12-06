@@ -155,5 +155,9 @@
     <string name="welcome_screen_social_text">Делитесь понравившимися цитатами в социальных сетях и не забывайте поддерживать разработку приложения рейтингом на Google Play.\nБлагодарим за скачивание Top Quotes!</string>
     <string name="welcome_screen_toast">Пожалуйста, дочитайте информацию до конца и нажмите Вперед</string>
     <string name="welcome_screen_thanks">Спасибо. Вперед!</string>
+    <string name="google_connected">Авторизация выполнена</string>
+    <string name="google_disconnected">Деавторизация выполнена</string>
+    <string name="login_text">Нажмите Вход для продолжения</string>
+    <string name="logout_text">Выход</string>
 
 </resources>

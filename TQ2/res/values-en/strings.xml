@@ -151,5 +151,9 @@
     <string name="welcome_screen_social_text">Share your favourite quotes with friends and do not forget to rate Top Quotes with 5 stars to support the development.\nThank you!</string>
     <string name="welcome_screen_toast">Please, read all the information above and press Start</string>
     <string name="welcome_screen_thanks">Great! Start reading</string>
+    <string name="google_connected">Login complete</string>
+    <string name="google_disconnected">Logout complete</string>
+    <string name="login_text">Click Sign in to start</string>
+    <string name="logout_text">Log Out</string>
 
 </resources>

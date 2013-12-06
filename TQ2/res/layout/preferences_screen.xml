@@ -148,13 +148,20 @@
                 android:text="@string/more_title" />
 
             <Button
-                android:id="@+id/WelcomeScreen_startButton"
+                android:id="@+id/PreferencesScreen_rateButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/rate_app" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/PreferencesScreen_exitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_text" />
+
     </LinearLayout>
 
 </FrameLayout>
