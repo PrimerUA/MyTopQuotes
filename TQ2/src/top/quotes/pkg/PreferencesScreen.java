@@ -1,14 +1,5 @@
 package top.quotes.pkg;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.plus.PlusClient;
-import com.google.android.gms.plus.PlusClient.OnAccessRevokedListener;
-
-import top.quotes.pkg.R;
-import top.quotes.pkg.messages.ExitDialog;
 import top.quotes.pkg.util.PreferencesLoader;
 import top.quotes.pkg.util.controllers.LanguageController;
 import android.app.Activity;
@@ -25,10 +16,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.plus.PlusClient;
+import com.google.android.gms.plus.PlusClient.OnAccessRevokedListener;
 
 public class PreferencesScreen extends Activity implements OnCheckedChangeListener, GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 
