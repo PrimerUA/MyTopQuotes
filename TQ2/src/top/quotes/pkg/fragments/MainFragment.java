@@ -83,8 +83,10 @@ public class MainFragment extends CoreFragment {
 		addButtonRight.setImageResource(android.R.drawable.ic_menu_add);
 		if (getTheme() == 0) {
 			addButtonRight.setBackgroundResource(R.drawable.quote_selector_pink);
-		} else {
+		} else if (getTheme() == 0) {
 			addButtonRight.setBackgroundResource(R.drawable.quote_selector_white);
+		} else {
+			addButtonRight.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 		addButtonRight.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -103,8 +105,10 @@ public class MainFragment extends CoreFragment {
 		addButtonLeft.setImageResource(android.R.drawable.ic_menu_add);
 		if (getTheme() == 0) {
 			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_pink);
-		} else {
+		} else if (getTheme() == 0) {
 			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_white);
+		} else {
+			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 		addButtonLeft.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -118,9 +122,10 @@ public class MainFragment extends CoreFragment {
 	protected void updateContent() {
 		if (getTheme() == 0) {
 			drawerImage.setBackgroundColor(Color.parseColor("#c92064"));
-		} else {
+		} else if (getTheme() == 1) {
 			drawerImage.setBackgroundColor(Color.DKGRAY);
-
+		} else {
+			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
 		leftScroll.fullScroll(ScrollView.FOCUS_UP);
 		rightScroll.fullScroll(ScrollView.FOCUS_UP);
@@ -143,10 +148,11 @@ public class MainFragment extends CoreFragment {
 
 		if (getTheme() == 0) {
 			drawerImage.setBackgroundColor(Color.parseColor("#c92064"));
+		} else if (getTheme() == 1) {
+			drawerImage.setBackgroundColor(Color.DKGRAY);
 		} else {
-			drawerImage.setBackgroundColor(Color.LTGRAY);
+			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
-		
 
 		getSherlockActivity().getSupportActionBar().setSelectedNavigationItem(getLanguage().ordinal());
 	}

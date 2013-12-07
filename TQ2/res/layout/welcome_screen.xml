@@ -7,7 +7,7 @@
     android:gravity="center" >
 
     <LinearLayout
-        android:id="@+id/PreferencesScreen_contentLayout"
+        android:id="@+id/WelcomeScreen_contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/m10"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content" >
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/auth_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_launcher" />

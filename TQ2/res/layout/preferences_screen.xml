@@ -59,6 +59,13 @@
                     android:layout_height="wrap_content" >
 
                     <RadioButton
+                        android:id="@+id/PreferencesScreen_themeRadioOrange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/theme_orange"
+                        android:textStyle="italic" />
+
+                    <RadioButton
                         android:id="@+id/PreferencesScreen_themeRadioPink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

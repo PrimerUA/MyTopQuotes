@@ -50,9 +50,9 @@ public class MainScreen extends SherlockFragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mShowsTitles;
-	
+
 	private AdvView advView;
-	
+
 	private AdView adView;
 
 	private static int selectedItem;
@@ -79,7 +79,7 @@ public class MainScreen extends SherlockFragmentActivity {
 
 		advView = AdvView.create(this, getString(R.string.ivengo_publisher_id));
 		advView.showBanner();
-		
+
 		adView = new AdView(this, AdSize.SMART_BANNER,
 				getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
@@ -105,10 +105,7 @@ public class MainScreen extends SherlockFragmentActivity {
 	private void setActionBar() {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		// getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(android.R.drawable.dialog_holo_dark_frame));
-		// SpinnerAdapter mSpinnerAdapter =
-		// ArrayAdapter.createFromResource(this, R.array.language_list,
-		// R.layout.sherlock_spinner_dropdown_item);
+
 		Context context = getSupportActionBar().getThemedContext();
 		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter
 				.createFromResource(context, R.array.language_list,
@@ -284,8 +281,10 @@ public class MainScreen extends SherlockFragmentActivity {
 		super.onResume();
 		if (PreferencesLoader.getTheme() == 0) {
 			mDrawerList.setBackgroundColor(Color.parseColor("#b40066"));
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			mDrawerList.setBackgroundColor(Color.parseColor("#919191"));
+		} else {
+			mDrawerList.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
 	}
 
@@ -312,7 +311,7 @@ public class MainScreen extends SherlockFragmentActivity {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();

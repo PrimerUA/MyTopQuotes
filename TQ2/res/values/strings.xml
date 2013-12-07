@@ -116,7 +116,8 @@
     <string name="theme_chooser">Темы оформления</string>
     <string name="default_language">Язык по умолчанию</string>
     <string name="theme_pink">Розовая пантера</string>
-    <string name="theme_white">Сталь</string>
+    <string name="theme_white">Прозрачная сталь</string>
+    <string name="theme_orange">Оранжевый свет</string>
     <string name="language_rus">Русский</string>
     <string name="language_eng">Английский</string>
     <string name="more_title">Еще от автора</string>

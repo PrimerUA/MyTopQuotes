@@ -20,10 +20,6 @@ public class DailyScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.daily_screen);
 
-		PreferencesLoader.initPrefs(this);
-		QuoteRatingsProvider.initRatings(this);
-		ShowsList.initShows(this);
-		
 		initScreen();
 		contentLayout.addView(QuoteViewsProvider.getDailyQuoteView(this));
 	}
@@ -41,4 +37,13 @@ public class DailyScreen extends Activity {
 		});
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		PreferencesLoader.initPrefs(this);
+		QuoteRatingsProvider.initRatings(this);
+		ShowsList.initShows(this);
+	}
+	
+	
 }

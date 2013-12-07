@@ -66,8 +66,10 @@ public class ShowsFragment extends CoreFragment implements LanguageChanger {
 
 		if (getTheme() == 0) {
 			drawerImage.setBackgroundColor(Color.parseColor("#c92064"));
-		} else {
+		} else if (getTheme() == 1) {
 			drawerImage.setBackgroundColor(Color.DKGRAY);
+		} else {
+			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
 
 		getSherlockActivity().getSupportActionBar().setSelectedNavigationItem(getLanguage().ordinal());
@@ -100,8 +102,10 @@ public class ShowsFragment extends CoreFragment implements LanguageChanger {
 		addButton.setText(R.string.add_button);
 		if (getTheme() == 0) {
 			addButton.setBackgroundResource(R.drawable.quote_selector_pink);
-		} else {
+		} else if (getTheme() == 1) {
 			addButton.setBackgroundResource(R.drawable.quote_selector_white);
+		} else {
+			addButton.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 		addButton.setShadowLayer(2, 2, 2, Color.WHITE);
 		addButton.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +120,10 @@ public class ShowsFragment extends CoreFragment implements LanguageChanger {
 	protected void updateContent() {
 		if (getTheme() == 0) {
 			drawerImage.setBackgroundColor(Color.parseColor("#c92064"));
-		} else {
+		} else if (getTheme() == 1) {
 			drawerImage.setBackgroundColor(Color.DKGRAY);
+		} else {
+			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
 		QuoteViewsProvider.clearOnScreenQuotesList();
 		contentLayout.removeAllViews();

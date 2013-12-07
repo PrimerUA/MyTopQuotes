@@ -199,7 +199,7 @@ public class QuizFragment extends SherlockFragment implements OnClickListener {
 			secondAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
 			thirdAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
 			fourthAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			quote.setBackgroundResource(R.drawable.quote_border_white);
 			answersLayout.setBackgroundResource(R.drawable.quote_border_white);
 			drawerImage.setBackgroundColor(Color.DKGRAY);
@@ -209,6 +209,16 @@ public class QuizFragment extends SherlockFragment implements OnClickListener {
 			secondAnswer.setBackgroundResource(R.drawable.quote_selector_white);
 			thirdAnswer.setBackgroundResource(R.drawable.quote_selector_white);
 			fourthAnswer.setBackgroundResource(R.drawable.quote_selector_white);
+		} else {
+			quote.setBackgroundResource(R.drawable.quote_border_orange);
+			answersLayout.setBackgroundResource(R.drawable.quote_border_orange);
+			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
+			score.setBackgroundResource(R.drawable.quote_border_orange);
+			attempts.setBackgroundResource(R.drawable.quote_border_orange);
+			firstAnswer.setBackgroundResource(R.drawable.quote_selector_orange);
+			secondAnswer.setBackgroundResource(R.drawable.quote_selector_orange);
+			thirdAnswer.setBackgroundResource(R.drawable.quote_selector_orange);
+			fourthAnswer.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 	}
 	
