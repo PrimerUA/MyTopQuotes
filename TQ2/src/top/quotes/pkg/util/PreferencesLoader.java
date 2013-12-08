@@ -38,7 +38,7 @@ public class PreferencesLoader {
 			language = LanguageController.ENG;
 		}
 		LanguageController.setCurrentLanguage(language);
-		theme = sharedPreferences.getInt(context.getString(R.string.prefs_theme), 0);
+		theme = sharedPreferences.getInt(context.getString(R.string.prefs_theme), 2);
 		daily = sharedPreferences.getBoolean(context.getString(R.string.prefs_daily), true);
 	}
 

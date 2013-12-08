@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -26,6 +28,9 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 	private SignInButton loginButton;
 	private PlusClient plusClient;
 
+	private ImageView authImage;
+	private LinearLayout authLayout;
+
 	private SharedPreferences prefs;
 
 	@Override
@@ -37,6 +42,9 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 	}
 
 	private void initScreen() {
+		authImage = (ImageView) findViewById(R.id.auth_image);
+		authLayout = (LinearLayout) findViewById(R.id.auth_layout);
+		
 		prefs = getSharedPreferences("topquotes", 0);
 
 		plusClient = new PlusClient.Builder(this, this, this)
@@ -56,6 +64,8 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 			try {
 				result.startResolutionForResult((Activity) this,
 						REQUEST_CODE_RESOLVE_ERR);
+				authImage.setVisibility(View.GONE);
+				authLayout.setBackgroundResource(R.drawable.w1);
 			} catch (IntentSender.SendIntentException e) {
 				plusClient.connect();
 			}
@@ -73,9 +83,10 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 
 		User user = new User();
 		user.setName(plusClient.getCurrentPerson().getName().getGivenName());
-		user.setSurename(plusClient.getCurrentPerson().getName().getFamilyName());
+		user.setSurename(plusClient.getCurrentPerson().getName()
+				.getFamilyName());
 		user.setEmail(plusClient.getAccountName());
-		
+
 		new Executor().sendUSerInfo(user);
 
 		User.setLoggedIn(true);

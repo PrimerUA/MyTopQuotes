@@ -10,27 +10,27 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 public class MoreScreen extends Activity {
-	
+
 	private LinearLayout truthLayout;
 	private LinearLayout vitacodeLayout;
 	private LinearLayout quarterLayout;
 	private LinearLayout blogLayout;
 	private LinearLayout vkLayout;
 	private LinearLayout brainLayout;
-	
+
 	private LinearLayout contentLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.more_screen);
-		
+
 		activityInit();
 	}
 
 	private void activityInit() {
 		contentLayout = (LinearLayout) findViewById(R.id.MoreScreen_contentLayout);
-		
+
 		truthLayout = (LinearLayout) findViewById(R.id.MoreScreen_truthLayout);
 		vitacodeLayout = (LinearLayout) findViewById(R.id.MoreScreen_vitacodeLayout);
 		quarterLayout = (LinearLayout) findViewById(R.id.MoreScreen_quarterLayout);
@@ -52,7 +52,7 @@ public class MoreScreen extends Activity {
 				visitUrl("https://play.google.com/store/apps/details?id=com.primerworldapps.brainbreak");
 			}
 		});
-		
+
 		vitacodeLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -87,11 +87,13 @@ public class MoreScreen extends Activity {
 
 		if (PreferencesLoader.getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
+		} else {
+			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 	}
-	
+
 	private void visitUrl(String url) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(browserIntent);

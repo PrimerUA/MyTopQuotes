@@ -27,7 +27,7 @@ public class QuoteViewsProvider {
 
 	private static ArrayList<Integer> onScreenQuotesList = new ArrayList<Integer>();
 	private static ArrayList<Integer> russianOnlyList = new ArrayList<Integer>();
-	
+
 	private static DailyQuote dailyQuote;
 
 	public static int getOnScreenQuotesListSize() {
@@ -38,20 +38,29 @@ public class QuoteViewsProvider {
 		onScreenQuotesList.clear();
 	}
 
-	public static View getQuoteView(final Context context, final Integer position, final LanguageController language, boolean isShareable) {
+	public static View getQuoteView(final Context context,
+			final Integer position, final LanguageController language,
+			boolean isShareable) {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(R.layout.quote_item, null);
 
-		TextView quoteText = (TextView) view.findViewById(R.id.DailyQuote_quoteText);
-		TextView showTitle = (TextView) view.findViewById(R.id.DailyQuote_showTitle);
-		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.DailyQuote_ratingBar);
-		ImageButton shareButton = (ImageButton) view.findViewById(R.id.DailyQuote_shareButton);
-		LinearLayout contentLayout = (LinearLayout) view.findViewById(R.id.DailyQuote_contentLayout);
+		TextView quoteText = (TextView) view
+				.findViewById(R.id.DailyQuote_quoteText);
+		TextView showTitle = (TextView) view
+				.findViewById(R.id.DailyQuote_showTitle);
+		RatingBar ratingBar = (RatingBar) view
+				.findViewById(R.id.DailyQuote_ratingBar);
+		ImageButton shareButton = (ImageButton) view
+				.findViewById(R.id.DailyQuote_shareButton);
+		LinearLayout contentLayout = (LinearLayout) view
+				.findViewById(R.id.DailyQuote_contentLayout);
 
 		if (PreferencesLoader.getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
+		} else {
+			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 
 		final Show show;
@@ -79,13 +88,16 @@ public class QuoteViewsProvider {
 		final Quote quote = show.getQuote(item, language);
 		quoteText.setText(quote.getText());
 		showTitle.setText(show.getTitle(language));
-		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(show.getQuote(item, language).getRating()));
+		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(show.getQuote(
+				item, language).getRating()));
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
 				quote.setRating(QuoteRatingsProvider.getRatingFromFloat(rating));
-				QuoteRatingsProvider.setQuoteRating(quote.getText(), quote.getRating());
+				QuoteRatingsProvider.setQuoteRating(quote.getText(),
+						quote.getRating());
 			}
 		});
 		if (isShareable) {
@@ -93,7 +105,8 @@ public class QuoteViewsProvider {
 
 				@Override
 				public void onClick(View v) {
-					shareQuote(context, show.getTitle(LanguageController.getCurrentLanguage()), quote.getText());
+					shareQuote(context, show.getTitle(LanguageController
+							.getCurrentLanguage()), quote.getText());
 				}
 			});
 		} else {
@@ -102,13 +115,15 @@ public class QuoteViewsProvider {
 
 				@Override
 				public void onClick(View v) {
-					shareQuote(context, show.getTitle(LanguageController.getCurrentLanguage()), quote.getText());
+					shareQuote(context, show.getTitle(LanguageController
+							.getCurrentLanguage()), quote.getText());
 
 				}
 			});
 		}
 
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 1, 0, 1);
 		view.setLayoutParams(params);
 
@@ -121,63 +136,84 @@ public class QuoteViewsProvider {
 		russianOnlyList.add(24);
 		russianOnlyList.add(27);
 	}
-	
+
 	public static View getDailyQuoteView(final Context context) {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(R.layout.quote_item, null);
 
-		TextView quoteText = (TextView) view.findViewById(R.id.DailyQuote_quoteText);
-		TextView showTitle = (TextView) view.findViewById(R.id.DailyQuote_showTitle);
-		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.DailyQuote_ratingBar);
-		ImageButton shareButton = (ImageButton) view.findViewById(R.id.DailyQuote_shareButton);
-		LinearLayout contentLayout = (LinearLayout) view.findViewById(R.id.DailyQuote_contentLayout);
+		TextView quoteText = (TextView) view
+				.findViewById(R.id.DailyQuote_quoteText);
+		TextView showTitle = (TextView) view
+				.findViewById(R.id.DailyQuote_showTitle);
+		RatingBar ratingBar = (RatingBar) view
+				.findViewById(R.id.DailyQuote_ratingBar);
+		ImageButton shareButton = (ImageButton) view
+				.findViewById(R.id.DailyQuote_shareButton);
+		LinearLayout contentLayout = (LinearLayout) view
+				.findViewById(R.id.DailyQuote_contentLayout);
 
 		if (PreferencesLoader.getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
+		} else {
+			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 
 		quoteText.setText(dailyQuote.getText());
 		showTitle.setText(dailyQuote.getShowTitle());
-		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(dailyQuote.getRating()));
+		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(dailyQuote
+				.getRating()));
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-				dailyQuote.setRating(QuoteRatingsProvider.getRatingFromFloat(rating));
-				QuoteRatingsProvider.setQuoteRating(dailyQuote.getText(), dailyQuote.getRating());
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				dailyQuote.setRating(QuoteRatingsProvider
+						.getRatingFromFloat(rating));
+				QuoteRatingsProvider.setQuoteRating(dailyQuote.getText(),
+						dailyQuote.getRating());
 			}
 		});
-			shareButton.setOnClickListener(new OnClickListener() {
+		shareButton.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					shareQuote(context, dailyQuote.getShowTitle(), dailyQuote.getText());
-				}
-			});
+			@Override
+			public void onClick(View v) {
+				shareQuote(context, dailyQuote.getShowTitle(),
+						dailyQuote.getText());
+			}
+		});
 
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 1, 0, 1);
 		view.setLayoutParams(params);
 
 		return view;
 	}
 
-	public static View getRatedQuoteView(final Context context, int position, Rating rating) {
+	public static View getRatedQuoteView(final Context context, int position,
+			Rating rating) {
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(R.layout.quote_item, null);
 
-		TextView quoteText = (TextView) view.findViewById(R.id.DailyQuote_quoteText);
-		TextView showTitle = (TextView) view.findViewById(R.id.DailyQuote_showTitle);
-		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.DailyQuote_ratingBar);
-		ImageButton shareButton = (ImageButton) view.findViewById(R.id.DailyQuote_shareButton);
-		LinearLayout contentLayout = (LinearLayout) view.findViewById(R.id.DailyQuote_contentLayout);
+		TextView quoteText = (TextView) view
+				.findViewById(R.id.DailyQuote_quoteText);
+		TextView showTitle = (TextView) view
+				.findViewById(R.id.DailyQuote_showTitle);
+		RatingBar ratingBar = (RatingBar) view
+				.findViewById(R.id.DailyQuote_ratingBar);
+		ImageButton shareButton = (ImageButton) view
+				.findViewById(R.id.DailyQuote_shareButton);
+		LinearLayout contentLayout = (LinearLayout) view
+				.findViewById(R.id.DailyQuote_contentLayout);
 
 		if (PreferencesLoader.getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else {
+		} else if (PreferencesLoader.getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
+		} else {
+			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 
 		ArrayList<String> ratingRUS1;
@@ -189,7 +225,8 @@ public class QuoteViewsProvider {
 		ArrayList<String> ratingENG3;
 
 		final String quote;
-		final LanguageController language = LanguageController.getCurrentLanguage();
+		final LanguageController language = LanguageController
+				.getCurrentLanguage();
 		if (language == LanguageController.RUS) {
 			if (rating == Rating.GOOD) {
 				ratingRUS3 = QuoteRatingsProvider.getRatingListRUS3();
@@ -244,14 +281,16 @@ public class QuoteViewsProvider {
 
 				@Override
 				public void onClick(View v) {
-					shareQuote(context, show.getTitle(LanguageController.getCurrentLanguage()), quote);
+					shareQuote(context, show.getTitle(LanguageController
+							.getCurrentLanguage()), quote);
 				}
 			});
 		} else {
 			showTitle.setText(R.string.app_name);
 			shareButton.setVisibility(View.GONE);
 		}
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 1, 0, 1);
 		view.setLayoutParams(params);
 
@@ -261,9 +300,11 @@ public class QuoteViewsProvider {
 	private static void shareQuote(Context context, String title, String quote) {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody = quote + context.getString(R.string.share_text) + " - " + title;
+		String shareBody = quote + context.getString(R.string.share_text)
+				+ " - " + title;
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-		context.startActivity(Intent.createChooser(sharingIntent, context.getString(R.string.share_with)));
+		context.startActivity(Intent.createChooser(sharingIntent,
+				context.getString(R.string.share_with)));
 	}
 
 	public static DailyQuote getDailyQuote() {
@@ -277,9 +318,11 @@ public class QuoteViewsProvider {
 			}
 		}
 		show = ShowsList.getList().get(random);
-		int item = randInt.nextInt(show.getQuotesList(PreferencesLoader.getLanguage()).size());
+		int item = randInt.nextInt(show.getQuotesList(
+				PreferencesLoader.getLanguage()).size());
 		Quote quote = show.getQuote(item, PreferencesLoader.getLanguage());
-		dailyQuote = new DailyQuote(show.getTitle(PreferencesLoader.getLanguage()), quote);
+		dailyQuote = new DailyQuote(show.getTitle(PreferencesLoader
+				.getLanguage()), quote);
 		return dailyQuote;
 	}
 
