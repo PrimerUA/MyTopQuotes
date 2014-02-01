@@ -124,8 +124,9 @@
     <string name="do_rate_it">Rate Top Quotes</string>
     <string name="remind">Remind me later</string>
     <string name="lazy">I am lazy</string>
-    <string name="more_truth">Truth Game</string>
     <string name="more_brain">Brain Break</string>
+    <string name="more_brain_text">Minimize stress and improve your brain preformance!</string>
+    <string name="more_truth">Truth Game</string>
     <string name="more_vitacode">Vitacode</string>
     <string name="more_95q">95 Quarter</string>
     <string name="more_vk">Android [VK group]</string>
@@ -156,5 +157,19 @@
     <string name="google_disconnected">Logout complete</string>
     <string name="login_text">Click Sign in to start</string>
     <string name="logout_text">Log Out from Google+</string>
+    <string name="user_quote_add">Add new quote</string>
+    <string name="user_quote_screen_title">Adding new quote</string>
+    <string name="user_quote_title">Show title*:</string>
+    <string name="user_quote_title_hint">Full show name required</string>
+    <string name="user_quote_text">Quote text*:</string>
+    <string name="user_quote_text_hint">Enter quote and the its author(s)</string>
+    <string name="user_quote_season">Season number:</string>
+    <string name="user_quote_episode">Episode number:</string>
+    <string name="user_quote_dialog_title">Thanks for your contribution!</string>
+    <string name="user_quote_dialog_text">Your quote have been sent to our database. It will appear in Quote Stream after it passes moderation stage. Would you like to add more quotes?</string>
+    <string name="user_quote_dialog_add">Add more</string>
+    <string name="user_quote_confirm_dialog_title">Confirmation</string>
+    <string name="user_quote_confirm_dialog_text">Post this new quote to stream?</string>
+    <string name="user_quote_confirm_dialog_confirm">YES!</string>
 
 </resources>

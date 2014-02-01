@@ -161,5 +161,19 @@
     <string name="google_disconnected">Деавторизация выполнена</string>
     <string name="login_text">Нажмите Вход для продолжения</string>
     <string name="logout_text">Выход из Google+</string>
+    <string name="user_quote_add">Добавить новую цитату</string>
+    <string name="user_quote_screen_title">Добавление новой цитаты</string>
+    <string name="user_quote_title">Название сериала*:</string>
+    <string name="user_quote_title_hint">Введите полное название сериала</string>
+    <string name="user_quote_text">Текст цитаты*:</string>
+    <string name="user_quote_text_hint">Введите цитату с указанием ее автора(ов)</string>
+    <string name="user_quote_season">Номер сезона:</string>
+    <string name="user_quote_episode">Номер серии:</string>
+    <string name="user_quote_dialog_title">Благодарим за Ваш вклад!</string>
+    <string name="user_quote_dialog_text">Ваша цитата была отправлена в нашу базу данных. Она появится в Потоке цитат сразу после прохождения модерации. Желаете добавить еще одну цитату?</string>
+    <string name="user_quote_dialog_add">Добавить еще</string>
+    <string name="user_quote_confirm_dialog_title">Подтверждение</string>
+    <string name="user_quote_confirm_dialog_text">Отправить эту цитату в общий Поток?</string>
+    <string name="user_quote_confirm_dialog_confirm">ДА!</string>
 
 </resources>

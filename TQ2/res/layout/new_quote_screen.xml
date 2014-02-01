@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aa000000" >
+
+    <LinearLayout
+        android:id="@+id/NewQuoteScreen_contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/m5"
+        android:layout_marginLeft="@dimen/m20"
+        android:layout_marginRight="@dimen/m20"
+        android:layout_marginTop="@dimen/m5"
+        android:background="@drawable/quote_border_pink"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/m10" >
+
+        <TextView
+            style="@style/text_quotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m3"
+            android:text="@string/user_quote_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/NewQuoteScreen_titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/user_quote_title_hint"
+            android:inputType="textPersonName" />
+
+        <TextView
+            style="@style/text_quotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m3"
+            android:text="@string/user_quote_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/NewQuoteScreen_quoteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/user_quote_text_hint"
+            android:inputType="textMultiLine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/text_quotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/m3"
+                android:text="@string/user_quote_season"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="serif" />
+
+            <EditText
+                android:id="@+id/NewQuoteScreen_seasonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/text_quotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/m3"
+                android:text="@string/user_quote_episode"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="serif" />
+
+            <EditText
+                android:id="@+id/NewQuoteScreen_episodeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/NewQuoteScreen_addButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="@string/user_quote_add"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
