@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -16,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import top.quotes.pkg.entity.User;
@@ -144,7 +146,15 @@ public class Executor {
 		return false;
 	}
 
-	private List<UserQuote> parseLikesNumber(Reader reader) {
-		return null;
+	private List<UserQuote> parseLikesNumber(Reader reader) throws IOException {
+		List<UserQuote> result = null;
+
+		Type listType = new TypeToken<List<UserQuote>>() {
+		}.getType();
+		Object buff = gson.fromJson(reader, listType);
+		result = (List<UserQuote>) buff;
+
+		reader.close();
+		return result;
 	}
 }
