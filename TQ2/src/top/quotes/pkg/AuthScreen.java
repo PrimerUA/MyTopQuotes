@@ -85,7 +85,7 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 		user.setName(plusClient.getCurrentPerson().getDisplayName());
 		user.setEmail(plusClient.getAccountName());
 
-		new Executor().sendUSerInfo(user);
+		new Executor().register(user);
 
 		User.setLoggedIn(true);
 		SharedPreferences.Editor editor = prefs.edit();
