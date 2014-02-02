@@ -175,5 +175,9 @@
     <string name="user_quote_confirm_dialog_title">Подтверждение</string>
     <string name="user_quote_confirm_dialog_text">Отправить эту цитату в общий Поток?</string>
     <string name="user_quote_confirm_dialog_confirm">ДА!</string>
+    <string name="user_quote_failed_title">Не удалось отправить цитату</string>
+    <string name="registration_failed_title">Не удалось авторизироваться</string>
+    <string name="connection_check_text">Пожалуйста, проверьте Ваше интернет соединение и попытайтесь снова</string>
+    <string name="empty_fields">Поля название сериала и цитата должны быть заполнены</string>
 
 </resources>

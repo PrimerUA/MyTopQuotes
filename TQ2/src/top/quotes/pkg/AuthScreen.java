@@ -1,10 +1,11 @@
 package top.quotes.pkg;
 
 import top.quotes.pkg.entity.User;
-import top.quotes.pkg.register.Executor;
+import top.quotes.pkg.executor.Executor;
+import top.quotes.pkg.util.PreferencesLoader;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,8 +32,6 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 	private ImageView authImage;
 	private LinearLayout authLayout;
 
-	private SharedPreferences prefs;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,8 +43,6 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 	private void initScreen() {
 		authImage = (ImageView) findViewById(R.id.auth_image);
 		authLayout = (LinearLayout) findViewById(R.id.auth_layout);
-		
-		prefs = getSharedPreferences("topquotes", 0);
 
 		plusClient = new PlusClient.Builder(this, this, this)
 				.setScopes(Scopes.PLUS_LOGIN)
@@ -78,21 +75,30 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		Toast.makeText(this, getString(R.string.google_connected) + "\n" + plusClient.getCurrentPerson().getDisplayName(),
+		Toast.makeText(
+				this,
+				getString(R.string.google_connected) + "\n"
+						+ plusClient.getCurrentPerson().getDisplayName(),
 				Toast.LENGTH_SHORT).show();
 
-		User user = new User();
-		user.setName(plusClient.getCurrentPerson().getDisplayName());
-		user.setEmail(plusClient.getAccountName());
+		User.getInstance().setName(
+				plusClient.getCurrentPerson().getDisplayName());
+		User.getInstance().setEmail(plusClient.getAccountName());
 
-		new Executor().register(user);
-
-		User.setLoggedIn(true);
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putBoolean("loggedIn", true);
-		editor.commit();
-
-		finish();
+		int userId = new Executor().register(User.getInstance());
+		if (userId != -1) {
+			User.getInstance().setId(userId);
+			User.getInstance().setLoggedIn(true);
+			PreferencesLoader.saveUserData();
+			finish();
+		} else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.registration_failed_title);
+			builder.setMessage(R.string.connection_check_text);
+			builder.setIcon(R.drawable.ic_launcher);
+			builder.setCancelable(true);
+			builder.show();
+		}
 	}
 
 	@Override

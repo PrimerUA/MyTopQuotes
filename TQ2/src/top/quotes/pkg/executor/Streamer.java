@@ -1,4 +1,4 @@
-package top.quotes.pkg.register;
+package top.quotes.pkg.executor;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;

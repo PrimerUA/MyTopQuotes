@@ -1,4 +1,4 @@
-package top.quotes.pkg.register;	
+package top.quotes.pkg.executor;	
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -146,6 +146,7 @@ public class Executor {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<UserQuote> parseLikesNumber(Reader reader) throws IOException {
 		List<UserQuote> result = null;
 

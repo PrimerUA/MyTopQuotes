@@ -171,5 +171,9 @@
     <string name="user_quote_confirm_dialog_title">Confirmation</string>
     <string name="user_quote_confirm_dialog_text">Post this new quote to stream?</string>
     <string name="user_quote_confirm_dialog_confirm">YES!</string>
+    <string name="user_quote_failed_title">Failed to post quote</string>
+    <string name="registration_failed_title">Registration failed</string>
+    <string name="connection_check_text">Please, check your internet connection and try again later</string>
+    <string name="empty_fields">Fill in shows title and quote text</string>
 
 </resources>

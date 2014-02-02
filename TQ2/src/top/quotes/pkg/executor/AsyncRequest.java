@@ -1,4 +1,4 @@
-package top.quotes.pkg.register;
+package top.quotes.pkg.executor;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;

@@ -2,10 +2,22 @@ package top.quotes.pkg.entity;
 
 public class User {
 
-	private static boolean loggedIn = false;
-
+	private boolean loggedIn = false;
+	private static User instance = null;
+	private int id = -1;
 	private String name;
 	private String email;
+
+	public static User getInstance() {
+		if (instance == null)
+			return new User();
+		else
+			return instance;
+	}
+
+	private User() {
+
+	}
 
 	public String getName() {
 		return name;
@@ -23,12 +35,20 @@ public class User {
 		this.email = email;
 	}
 
-	public static boolean isLoggedIn() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public boolean isLoggedIn() {
 		return loggedIn;
 	}
 
-	public static void setLoggedIn(boolean loggedIn) {
-		User.loggedIn = loggedIn;
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 }
