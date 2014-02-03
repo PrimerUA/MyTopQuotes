@@ -1,4 +1,4 @@
-package top.quotes.pkg.register;	
+package top.quotes.pkg.server;	
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class Executor {
 		if (reader.hasNext()) {
 			String name = reader.nextName();
 
-			if ("likes".equals(name)) {
+			if ("id".equals(name)) {
 				res = reader.nextInt();
 			}
 		}

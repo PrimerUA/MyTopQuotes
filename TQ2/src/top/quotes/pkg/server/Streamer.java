@@ -1,4 +1,4 @@
-package top.quotes.pkg.register;
+package top.quotes.pkg.server;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -9,7 +9,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class Streamer extends AsyncTask<String, Integer, byte[]>{
+class Streamer extends AsyncTask<String, Integer, byte[]>{
 
 	@Override
 	protected byte[] doInBackground(String... params) {

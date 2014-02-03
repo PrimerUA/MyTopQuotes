@@ -1,7 +1,7 @@
 package top.quotes.pkg;
 
 import top.quotes.pkg.entity.User;
-import top.quotes.pkg.register.Executor;
+import top.quotes.pkg.server.Executor;
 import android.app.Activity;
 import android.content.IntentSender;
 import android.content.SharedPreferences;

@@ -6,6 +6,7 @@ import top.quotes.pkg.data.ShowsList;
 import top.quotes.pkg.entity.User;
 import top.quotes.pkg.fragments.MainFragment;
 import top.quotes.pkg.messages.ExitDialog;
+import top.quotes.pkg.server.Executor;
 import top.quotes.pkg.util.AppRater;
 import top.quotes.pkg.util.PreferencesLoader;
 import top.quotes.pkg.util.controllers.BackgroundController;
@@ -92,6 +93,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			editor.commit();
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
+		
 		User.setLoggedIn(prefs.getBoolean("loggedIn", false));
 		if (!User.isLoggedIn() && isOnline()) {
 			startActivity(new Intent(this, AuthScreen.class));
