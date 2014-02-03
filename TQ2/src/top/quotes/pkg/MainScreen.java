@@ -73,14 +73,12 @@ public class MainScreen extends SherlockFragmentActivity {
 		setDrawerPanel(savedInstanceState);
 		setActionBar();
 
-		getSupportFragmentManager().beginTransaction()
-				.add(R.id.content_frame, new MainFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new MainFragment()).commit();
 
-		advView = AdvView.create(this, getString(R.string.ivengo_publisher_id)); //"test");
+		advView = AdvView.create(this, getString(R.string.ivengo_publisher_id)); // "test");
 		advView.showBanner();
 
-		adView = new AdView(this, AdSize.SMART_BANNER,
-				getString(R.string.admob_publisher_id));
+		adView = new AdView(this, AdSize.SMART_BANNER, getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
 		adView.loadAd(new AdRequest());
 
@@ -91,7 +89,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			editor.commit();
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
-		
+
 		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {
 			startActivity(new Intent(this, AuthScreen.class));
 		}
@@ -106,28 +104,21 @@ public class MainScreen extends SherlockFragmentActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Context context = getSupportActionBar().getThemedContext();
-		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter
-				.createFromResource(context, R.array.language_list,
-						R.layout.sherlock_spinner_item);
-		listAdapter
-				.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(context, R.array.language_list, R.layout.sherlock_spinner_item);
+		listAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		getSupportActionBar().setListNavigationCallbacks(listAdapter,
-				new OnNavigationListener() {
+		getSupportActionBar().setListNavigationCallbacks(listAdapter, new OnNavigationListener() {
 
-					@Override
-					public boolean onNavigationItemSelected(int itemPosition,
-							long itemId) {
-						if (itemPosition == 0) {
-							LanguageController
-									.setCurrentLanguage(LanguageController.RUS);
-						} else {
-							LanguageController
-									.setCurrentLanguage(LanguageController.ENG);
-						}
-						return true;
-					}
-				});
+			@Override
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				if (itemPosition == 0) {
+					LanguageController.setCurrentLanguage(LanguageController.RUS);
+				} else {
+					LanguageController.setCurrentLanguage(LanguageController.ENG);
+				}
+				return true;
+			}
+		});
 	}
 
 	private void initScreen() {
@@ -144,20 +135,16 @@ public class MainScreen extends SherlockFragmentActivity {
 		prefs = getSharedPreferences("topquotes", 0);
 	}
 
-	private class DrawerItemClickListener implements
-			ListView.OnItemClickListener {
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 		SherlockFragment fragment = null;
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			fragment = selectItem(position);
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.content_frame, fragment).commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
 
 			if (position != 0 && position != 1) {
-				BackgroundController.changeBackground(position
-						- ConstantsFacade.MENU_ITEMS_NOT_SHOWS, mDrawerLayout);
+				BackgroundController.changeBackground(position - ConstantsFacade.MENU_ITEMS_NOT_SHOWS, mDrawerLayout);
 			} else {
 				BackgroundController.changeBackground(-1, mDrawerLayout);
 			}
@@ -171,20 +158,15 @@ public class MainScreen extends SherlockFragmentActivity {
 	}
 
 	private void setDrawerPanel(Bundle savedInstanceState) {
-		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
-				GravityCompat.START);
+		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
 		if (android.os.Build.VERSION.SDK_INT >= 11) {
-			mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-					R.layout.drawer_list_item, mShowsTitles));
+			mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mShowsTitles));
 		} else {
-			mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-					R.layout.drawer_list_item_compat, mShowsTitles));
+			mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item_compat, mShowsTitles));
 		}
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.drawable.ic_drawer, R.string.drawer_open,
-				R.string.drawer_close) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
 				getSupportActionBar().setTitle(mTitle);
 			}

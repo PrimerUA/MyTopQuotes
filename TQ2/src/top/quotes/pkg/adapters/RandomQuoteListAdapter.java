@@ -1,10 +1,14 @@
 package top.quotes.pkg.adapters;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import top.quotes.pkg.R;
 import top.quotes.pkg.data.Quote;
+import top.quotes.pkg.data.Show;
+import top.quotes.pkg.data.ShowsList;
 import top.quotes.pkg.util.PreferencesLoader;
+import top.quotes.pkg.util.controllers.LanguageController;
 import top.quotes.pkg.util.providers.QuoteRatingsProvider;
 import android.content.Context;
 import android.content.Intent;
@@ -19,20 +23,17 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
-public class QuoteListAdapter extends BaseAdapter {
+public class RandomQuoteListAdapter extends BaseAdapter {
 
 	private Context context;
 	private View view;
 
 	private LayoutInflater inflater = null;
 
-	private String title;
 	private ArrayList<Quote> quotesList;
 
-	public QuoteListAdapter(Context context, String title, ArrayList<Quote> quotesList) {
+	public RandomQuoteListAdapter(Context context) {
 		this.context = context;
-		this.title = title;
-		this.quotesList = quotesList;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -71,9 +72,10 @@ public class QuoteListAdapter extends BaseAdapter {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 
-		final Quote quote = quotesList.get(position);
+		final Show show = ShowsList.getList().get(new Random().nextInt(ShowsList.SHOWS_LIST_SIZE));
+		final Quote quote = show.getQuote(new Random().nextInt(ShowsList.getList().size()), LanguageController.getCurrentLanguage());
 		quoteText.setText(quote.getText());
-		showTitle.setText(title);
+		showTitle.setText(show.getTitle(LanguageController.getCurrentLanguage()));
 		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(quote.getRating()));
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
@@ -83,11 +85,12 @@ public class QuoteListAdapter extends BaseAdapter {
 				QuoteRatingsProvider.setQuoteRating(quote.getText(), quote.getRating());
 			}
 		});
-		shareButton.setOnClickListener(new View.OnClickListener() {
+		shareButton.setVisibility(View.GONE);
+		contentLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				shareQuote(context, title, quote.getText());
+				shareQuote(context, show.getTitle(LanguageController.getCurrentLanguage()), quote.getText());
 			}
 		});
 

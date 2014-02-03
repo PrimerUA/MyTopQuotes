@@ -1,20 +1,29 @@
 package top.quotes.pkg.fragments;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import top.quotes.pkg.R;
+import top.quotes.pkg.adapters.QuoteListAdapter;
+import top.quotes.pkg.adapters.RandomQuoteListAdapter;
+import top.quotes.pkg.adapters.UserQuoteListAdapter;
 import top.quotes.pkg.constants.ConstantsFacade;
 import top.quotes.pkg.core.CoreFragment;
 import top.quotes.pkg.data.Quote;
+import top.quotes.pkg.data.Show;
+import top.quotes.pkg.data.ShowsList;
 import top.quotes.pkg.entity.UserQuote;
 import top.quotes.pkg.server.Executor;
 import top.quotes.pkg.util.controllers.LanguageController;
 import top.quotes.pkg.util.controllers.LanguageController.LanguageChanger;
 import top.quotes.pkg.util.providers.ConnectionProvider;
 import top.quotes.pkg.util.providers.QuoteViewsProvider;
+import top.quotes.pkg.util.providers.ShowsProvider;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.style.QuoteSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +33,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainFragment extends CoreFragment {
 
@@ -34,10 +43,11 @@ public class MainFragment extends CoreFragment {
 	private ListView rightList;
 
 	private ImageView drawerImage;
-	
-	private List<Quote>quotesList;
-	private List<UserQuote>userQuotesList;
-	
+
+	private List<UserQuote> userQuotesList;
+	private boolean isEndLeft;
+	private boolean isEndRight;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -143,6 +153,9 @@ public class MainFragment extends CoreFragment {
 
 	@Override
 	protected void initFragment() {
+		isEndLeft = false;
+		isEndRight = false;
+
 		leftList = (ListView) rootView.findViewById(R.id.MainFragment_leftList);
 		rightList = (ListView) rootView.findViewById(R.id.MainFragment_rightList);
 
@@ -161,18 +174,8 @@ public class MainFragment extends CoreFragment {
 
 	@Override
 	protected void addQuotesOnScreen() {
-		if (!ConnectionProvider.isConnectionAvailable(getActivity())) {
-			addQuotesOnLeft();
-			addQuotesOnRight();
-		} else {
-			leftColumnLayout.removeAllViews();
-			loadContentOnScreen();
-		}
-	}
-
-	private void loadContentOnScreen() {
-		final ProgressDialog myProgressDialog = ProgressDialog.show(getActivity(), getString(R.string.connection), getString(R.string.connection_loading_quote),
-				true);
+		final ProgressDialog myProgressDialog = ProgressDialog.show(getActivity(), getString(R.string.connection),
+				getString(R.string.connection_loading_quote), true);
 		new Thread() {
 			public void run() {
 				getActivity().runOnUiThread(new Runnable() {
@@ -185,7 +188,7 @@ public class MainFragment extends CoreFragment {
 			}
 		}.start();
 	}
-	
+
 	private void doLoadContent() {
 		int itemsQuantity = 0;
 		boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
@@ -194,40 +197,94 @@ public class MainFragment extends CoreFragment {
 		} else {
 			itemsQuantity = 10;
 		}
-		userQuotesList = new Executor().list(from, length).getList(CaseListType.TYPE_GENERAL, 0, itemsQuantity,
-				sortSpinner.getSelectedItemPosition(), type);
-		if (caseBeanList == null) {
-			MessageDialogs.showMessage(rootView.getContext(), getString(R.string.no_connection_title),
-					getString(R.string.no_connection_text));
+		isEndLeft = false;
+		isEndRight = false;
+		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
+			userQuotesList = new Executor().list(0, itemsQuantity, LanguageController.getCurrentLanguage());
+			leftList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
+			userQuotesList = new Executor().list(itemsQuantity, itemsQuantity * 2, LanguageController.getCurrentLanguage());
+			rightList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
 		} else {
-			isEnd = false;
-			contentList.setAdapter(new CasesListAdapter(getActivity(), caseBeanList));
-			contentList.setOnScrollListener(new OnScrollListener() {
-				@Override
-				public void onScrollStateChanged(AbsListView view, int scrollState) {
-				}
+			leftList.setAdapter(new RandomQuoteListAdapter(getActivity()));
+			rightList.setAdapter(new RandomQuoteListAdapter(getActivity()));
+		}
 
-				private int lastSavedFirst = -1;
-
-				@Override
-				public void onScroll(final AbsListView view, final int first, final int visible, final int total) {
-					if (!isEnd && (visible < total) && (first + visible == total) && (first != lastSavedFirst)) {
-						lastSavedFirst = first;
-						addItemsOnScreen();
-					}
-				}
-			});
-
-			TextView infoText = (TextView) getActivity().getLayoutInflater().inflate(R.xml.empty_list_item, null);
-			LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-			params.setMargins(25, 25, 25, 25);
-			infoText.setLayoutParams(params);
-			if (contentList.getCount() == 0) {
-				infoText.setTag(1);
-				mainLayout.addView(infoText);
-			} else {
-				mainLayout.removeView(mainLayout.findViewWithTag(1));
+		leftList.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
 			}
+
+			private int lastSavedFirst = -1;
+
+			@Override
+			public void onScroll(final AbsListView view, final int first, final int visible, final int total) {
+				if (!isEndLeft && (visible < total) && (first + visible == total) && (first != lastSavedFirst)) {
+					lastSavedFirst = first;
+					addItemsOnScreen();
+				}
+			}
+		});
+		rightList.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+			}
+
+			private int lastSavedFirst = -1;
+
+			@Override
+			public void onScroll(final AbsListView view, final int first, final int visible, final int total) {
+				if (!isEndRight && (visible < total) && (first + visible == total) && (first != lastSavedFirst)) {
+					lastSavedFirst = first;
+					addItemsOnScreen();
+				}
+			}
+		});
+	}
+
+	protected void addItemsOnScreen() {
+		final ProgressDialog myProgressDialog = ProgressDialog.show(getActivity(), getString(R.string.connection),
+				getString(R.string.connection_loading_quote), true);
+		new Thread() {
+			public void run() {
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						doAddItems();
+						myProgressDialog.dismiss();
+					}
+				});
+			}
+		}.start();
+	}
+
+	protected void doAddItems() {
+		int itemsQuantity = 0;
+		boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+		if (tabletSize) {
+			itemsQuantity = 10;
+		} else {
+			itemsQuantity = 5;
+		}
+		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
+			List<UserQuote> newPostsLeft = new Executor().list(userQuotesList.size(), itemsQuantity, LanguageController.getCurrentLanguage());
+			List<UserQuote> newPostsRight = new Executor().list(userQuotesList.size() + itemsQuantity, itemsQuantity, LanguageController.getCurrentLanguage());
+			if (newPostsLeft.size() == 0) {
+				isEndLeft = true;
+				Toast.makeText(getActivity(), getString(R.string.all_items_loaded), Toast.LENGTH_SHORT).show();
+			} else if (newPostsRight.size() == 0) {
+				isEndRight = true;
+				Toast.makeText(getActivity(), getString(R.string.all_items_loaded), Toast.LENGTH_SHORT).show();
+			}else {
+				userQuotesList.addAll(newPostsLeft);
+				userQuotesList.addAll(newPostsRight);
+				((RandomQuoteListAdapter) leftList.getAdapter()).notifyDataSetChanged();
+				((RandomQuoteListAdapter) rightList.getAdapter()).notifyDataSetChanged();
+			}
+		} else {
+			final Show show = ShowsList.getList().get(new Random().nextInt(ShowsList.SHOWS_LIST_SIZE));
+			final Quote quote = show.getQuote(new Random().nextInt(ShowsList.getList().size()), LanguageController.getCurrentLanguage());
+		}
+		
 	}
 
 }

@@ -185,5 +185,6 @@
     <string name="quote_season">Сезон</string>
     <string name="quote_episode">Эпизод</string>
     <string name="quote_by">от</string>
+    <string name="all_items_loaded">Конец списка</string>
 
 </resources>

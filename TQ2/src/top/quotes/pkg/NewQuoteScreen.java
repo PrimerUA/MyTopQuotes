@@ -11,9 +11,11 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -25,6 +27,7 @@ public class NewQuoteScreen extends SherlockActivity {
 	private EditText quoteText;
 	private EditText seasonText;
 	private EditText episodeText;
+	private Spinner languageSpinner;
 	private Button addButton;
 
 	@Override
@@ -46,7 +49,12 @@ public class NewQuoteScreen extends SherlockActivity {
 		quoteText = (EditText) findViewById(R.id.NewQuoteScreen_quoteText);
 		seasonText = (EditText) findViewById(R.id.NewQuoteScreen_seasonText);
 		episodeText = (EditText) findViewById(R.id.NewQuoteScreen_episodeText);
-
+		
+		languageSpinner = (Spinner) findViewById(R.id.NewQuoteScreen_languageSpinner);
+		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(this, R.array.language_list, R.layout.sherlock_spinner_item);
+		listAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+		languageSpinner.setAdapter(listAdapter);
+		
 		addButton = (Button) findViewById(R.id.NewQuoteScreen_addButton);
 		addButton.setOnClickListener(new View.OnClickListener() {
 
@@ -103,7 +111,7 @@ public class NewQuoteScreen extends SherlockActivity {
 							UserQuote quote = new UserQuote();
 							quote.setTitle(titleText.getText().toString()).setText(quoteText.getText().toString())
 									.setSeason(Integer.valueOf(seasonText.getText().toString())).setEpisode(Integer.valueOf(episodeText.getText().toString()))
-									.setUserId(user.getId());
+									.setUserId(user.getId()).setLanguage(languageSpinner.getSelectedItemPosition());
 							if (new Executor().sendQuote(quote) == true) {
 								showSuccessDialog();
 							} else {
@@ -151,4 +159,5 @@ public class NewQuoteScreen extends SherlockActivity {
 		});
 		builder.show();
 	}
+
 }

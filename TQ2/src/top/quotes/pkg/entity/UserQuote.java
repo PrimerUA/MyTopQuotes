@@ -8,6 +8,7 @@ public class UserQuote {
 	private int episode;
 	private int userId;
 	private String userName;
+	private int language;
 	
 	public String getText() {
 		return quote;
@@ -61,5 +62,13 @@ public class UserQuote {
 	public UserQuote setUserName(String userName) {
 		this.userName = userName;
 		return this;
+	}
+
+	public int getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(int language) {
+		this.language = language;
 	}
 }

@@ -181,5 +181,6 @@
     <string name="quote_season">Season</string>
     <string name="quote_episode">Episode</string>
     <string name="quote_by">by</string>
+    <string name="all_items_loaded">End of list</string>
 
 </resources>

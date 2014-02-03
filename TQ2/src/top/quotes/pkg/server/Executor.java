@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonReader;
 
 import top.quotes.pkg.entity.User;
 import top.quotes.pkg.entity.UserQuote;
+import top.quotes.pkg.util.controllers.LanguageController;
 
 public class Executor {
 
@@ -67,7 +68,7 @@ public class Executor {
 		return false;
 	}
 
-	public List<UserQuote> list(int from, int length) {
+	public List<UserQuote> list(int from, int length, LanguageController languageController) {
 		try {
 
 			Reader reader = getReader(getStream(url + "list.php?from=" + from
