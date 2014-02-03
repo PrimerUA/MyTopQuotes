@@ -5,6 +5,7 @@ import top.quotes.pkg.constants.ConstantsFacade;
 import top.quotes.pkg.core.CoreFragment;
 import top.quotes.pkg.util.controllers.LanguageController;
 import top.quotes.pkg.util.controllers.LanguageController.LanguageChanger;
+import top.quotes.pkg.util.providers.ConnectionProvider;
 import top.quotes.pkg.util.providers.QuoteViewsProvider;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,9 +30,9 @@ public class MainFragment extends CoreFragment {
 
 	private ImageView drawerImage;
 
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_main, container, false);
 		initFragment();
 
@@ -53,40 +54,48 @@ public class MainFragment extends CoreFragment {
 	}
 
 	private void addQuotesOnLeft() {
-		ImageButton previousLeftAddButton = (ImageButton) leftColumnLayout.findViewWithTag("add_button_left");
+		ImageButton previousLeftAddButton = (ImageButton) leftColumnLayout
+				.findViewWithTag("add_button_left");
 		if (previousLeftAddButton != null) {
 			leftColumnLayout.removeView(previousLeftAddButton);
 		}
 		for (int i = 0; i < ConstantsFacade.RANDOM_QUOTES_COUNT; i++) {
-			leftColumnLayout.addView(QuoteViewsProvider.getQuoteView(rootView.getContext(), null, getLanguage(), false));
+			leftColumnLayout.addView(QuoteViewsProvider.getQuoteView(
+					rootView.getContext(), null, getLanguage(), false));
 		}
 		setLeftAddButton();
 	}
 
 	private void addQuotesOnRight() {
-		ImageButton previousRightAddButton = (ImageButton) rightColumnLayout.findViewWithTag("add_button_right");
+		ImageButton previousRightAddButton = (ImageButton) rightColumnLayout
+				.findViewWithTag("add_button_right");
 		if (previousRightAddButton != null) {
 			rightColumnLayout.removeView(previousRightAddButton);
 		}
 		for (int i = 0; i < ConstantsFacade.RANDOM_QUOTES_COUNT; i++) {
-			rightColumnLayout.addView(QuoteViewsProvider.getQuoteView(rootView.getContext(), null, getLanguage(), false));
+			rightColumnLayout.addView(QuoteViewsProvider.getQuoteView(
+					rootView.getContext(), null, getLanguage(), false));
 		}
 		setRightAddButton();
 	}
 
 	private void setRightAddButton() {
 		ImageButton addButtonRight = new ImageButton(rootView.getContext());
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT);
 		params.setMargins(1, 5, 1, 3);
 		addButtonRight.setLayoutParams(params);
 		addButtonRight.setTag("add_button_right");
 		addButtonRight.setImageResource(android.R.drawable.ic_menu_add);
 		if (getTheme() == 0) {
-			addButtonRight.setBackgroundResource(R.drawable.quote_selector_pink);
+			addButtonRight
+					.setBackgroundResource(R.drawable.quote_selector_pink);
 		} else if (getTheme() == 0) {
-			addButtonRight.setBackgroundResource(R.drawable.quote_selector_white);
+			addButtonRight
+					.setBackgroundResource(R.drawable.quote_selector_white);
 		} else {
-			addButtonRight.setBackgroundResource(R.drawable.quote_selector_orange);
+			addButtonRight
+					.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 		addButtonRight.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -98,7 +107,8 @@ public class MainFragment extends CoreFragment {
 
 	private void setLeftAddButton() {
 		ImageButton addButtonLeft = new ImageButton(rootView.getContext());
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT);
 		params.setMargins(1, 5, 1, 3);
 		addButtonLeft.setLayoutParams(params);
 		addButtonLeft.setTag("add_button_left");
@@ -106,9 +116,11 @@ public class MainFragment extends CoreFragment {
 		if (getTheme() == 0) {
 			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_pink);
 		} else if (getTheme() == 0) {
-			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_white);
+			addButtonLeft
+					.setBackgroundResource(R.drawable.quote_selector_white);
 		} else {
-			addButtonLeft.setBackgroundResource(R.drawable.quote_selector_orange);
+			addButtonLeft
+					.setBackgroundResource(R.drawable.quote_selector_orange);
 		}
 		addButtonLeft.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
@@ -138,13 +150,18 @@ public class MainFragment extends CoreFragment {
 
 	@Override
 	protected void initFragment() {
-		leftColumnLayout = (LinearLayout) rootView.findViewById(R.id.MainFragment_leftColumnLayout);
-		rightColumnLayout = (LinearLayout) rootView.findViewById(R.id.MainFragment_rightColumnLayout);
+		leftColumnLayout = (LinearLayout) rootView
+				.findViewById(R.id.MainFragment_leftColumnLayout);
+		rightColumnLayout = (LinearLayout) rootView
+				.findViewById(R.id.MainFragment_rightColumnLayout);
 
-		leftScroll = (ScrollView) rootView.findViewById(R.id.MainFragment_leftScrollLayout);
-		rightScroll = (ScrollView) rootView.findViewById(R.id.MainFragment_rightScrollLayout);
+		leftScroll = (ScrollView) rootView
+				.findViewById(R.id.MainFragment_leftScrollLayout);
+		rightScroll = (ScrollView) rootView
+				.findViewById(R.id.MainFragment_rightScrollLayout);
 
-		drawerImage = (ImageView) rootView.findViewById(R.id.MainFragment_drawerImage);
+		drawerImage = (ImageView) rootView
+				.findViewById(R.id.MainFragment_drawerImage);
 
 		if (getTheme() == 0) {
 			drawerImage.setBackgroundColor(Color.parseColor("#c92064"));
@@ -154,13 +171,19 @@ public class MainFragment extends CoreFragment {
 			drawerImage.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
 
-		getSherlockActivity().getSupportActionBar().setSelectedNavigationItem(getLanguage().ordinal());
+		getSherlockActivity().getSupportActionBar().setSelectedNavigationItem(
+				getLanguage().ordinal());
 	}
 
 	@Override
 	protected void addQuotesOnScreen() {
-		addQuotesOnLeft();
-		addQuotesOnRight();
+		if (!ConnectionProvider.isConnectionAvailable(getActivity())) {
+			addQuotesOnLeft();
+			addQuotesOnRight();
+		} else {
+			leftColumnLayout.removeAllViews();
+			//loadContentOnScreen(); 
+		}
 	}
 
 }

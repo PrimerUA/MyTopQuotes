@@ -12,14 +12,13 @@ import top.quotes.pkg.util.PreferencesLoader;
 import top.quotes.pkg.util.controllers.BackgroundController;
 import top.quotes.pkg.util.controllers.DailyNotificationController;
 import top.quotes.pkg.util.controllers.LanguageController;
+import top.quotes.pkg.util.providers.ConnectionProvider;
 import top.quotes.pkg.util.providers.QuoteRatingsProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -94,8 +93,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
 		
-		User.setLoggedIn(prefs.getBoolean("loggedIn", false));
-		if (!User.isLoggedIn() && isOnline()) {
+		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {
 			startActivity(new Intent(this, AuthScreen.class));
 		}
 	}
@@ -303,15 +301,6 @@ public class MainScreen extends SherlockFragmentActivity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-
-	public boolean isOnline() {
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override
