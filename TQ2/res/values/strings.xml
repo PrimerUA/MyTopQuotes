@@ -179,5 +179,11 @@
     <string name="registration_failed_title">Не удалось авторизироваться</string>
     <string name="connection_check_text">Пожалуйста, проверьте Ваше интернет соединение и попытайтесь снова</string>
     <string name="empty_fields">Поля название сериала и цитата должны быть заполнены</string>
+    <string name="connection">Соединение</string>
+    <string name="connection_posting_quote">Публикация цитаты...</string>
+    <string name="connection_loading_quote">Загрузка цитат...</string>
+    <string name="quote_season">Сезон</string>
+    <string name="quote_episode">Эпизод</string>
+    <string name="quote_by">от</string>
 
 </resources>

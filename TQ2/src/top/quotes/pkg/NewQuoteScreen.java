@@ -5,9 +5,10 @@ import top.quotes.pkg.entity.UserQuote;
 import top.quotes.pkg.server.Executor;
 import top.quotes.pkg.util.PreferencesLoader;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,8 +38,7 @@ public class NewQuoteScreen extends SherlockActivity {
 	private void initScreen() {
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle(
-				getString(R.string.user_quote_screen_title));
+		getSupportActionBar().setTitle(getString(R.string.user_quote_screen_title));
 
 		contentLayout = (LinearLayout) findViewById(R.id.NewQuoteScreen_contentLayout);
 
@@ -52,10 +52,10 @@ public class NewQuoteScreen extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				if ("".equals(titleText.getText().toString())
-						|| "".equals(quoteText.getText().toString()))
+				if ("".equals(titleText.getText().toString()) || "".equals(quoteText.getText().toString()))
 					showConfirmationDialog();
-				else Toast.makeText(NewQuoteScreen.this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
+				else
+					Toast.makeText(NewQuoteScreen.this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -81,35 +81,42 @@ public class NewQuoteScreen extends SherlockActivity {
 				dialog.dismiss();
 			}
 		});
-		builder.setPositiveButton(R.string.user_quote_confirm_dialog_confirm,
-				new OnClickListener() {
+		builder.setPositiveButton(R.string.user_quote_confirm_dialog_confirm, new OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						doPostQuote();
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				doPostQuote();
+			}
+		});
 		builder.show();
 	}
 
 	protected void doPostQuote() {
-		User user = User.getInstance();
-		if (user.isLoggedIn() && user.getId() != -1) {
-			UserQuote quote = new UserQuote();
-			quote.setTitle(titleText.getText().toString())
-					.setQuote(quoteText.getText().toString())
-					.setSeason(Integer.valueOf(seasonText.getText().toString()))
-					.setEpisode(
-							Integer.valueOf(episodeText.getText().toString()))
-					.setUserId(user.getId());
-			if (new Executor().sendQuote(quote) == true) {
-				showSuccessDialog();
-			} else {
-				showErrorDialog();
+		final ProgressDialog myProgressDialog = ProgressDialog.show(this, getString(R.string.connection), getString(R.string.connection_posting_quote), true);
+		new Thread() {
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						User user = User.getInstance();
+						if (user.isLoggedIn() && user.getId() != -1) {
+							UserQuote quote = new UserQuote();
+							quote.setTitle(titleText.getText().toString()).setText(quoteText.getText().toString())
+									.setSeason(Integer.valueOf(seasonText.getText().toString())).setEpisode(Integer.valueOf(episodeText.getText().toString()))
+									.setUserId(user.getId());
+							if (new Executor().sendQuote(quote) == true) {
+								showSuccessDialog();
+							} else {
+								showErrorDialog();
+							}
+						} else {
+							startActivity(new Intent(NewQuoteScreen.this, AuthScreen.class));
+						}
+					}
+				});
+				myProgressDialog.dismiss();
 			}
-		} else {
-			startActivity(new Intent(this, AuthScreen.class));
-		}
+		}.start();
 	}
 
 	private void showErrorDialog() {
@@ -135,14 +142,13 @@ public class NewQuoteScreen extends SherlockActivity {
 				finish();
 			}
 		});
-		builder.setPositiveButton(R.string.user_quote_dialog_add,
-				new OnClickListener() {
+		builder.setPositiveButton(R.string.user_quote_dialog_add, new OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 		builder.show();
 	}
 }

@@ -23,36 +23,20 @@
             android:layout_height="0dip"
             android:layout_weight="1" >
 
-            <ScrollView
-                android:id="@+id/MainFragment_leftScrollLayout"
-                android:layout_width="wrap_content"
+            <ListView
+                android:id="@+id/MainFragment_leftList"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
+            </ListView>
 
-                <LinearLayout
-                    android:id="@+id/MainFragment_leftColumnLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/m1"
-                    android:orientation="vertical" >
-                </LinearLayout>
-            </ScrollView>
-
-            <ScrollView
-                android:id="@+id/MainFragment_rightScrollLayout"
-                android:layout_width="wrap_content"
+            <ListView
+                android:id="@+id/MainFragment_rightList"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/m1"
                 android:layout_weight="1" >
+            </ListView>
 
-                <LinearLayout
-                    android:id="@+id/MainFragment_rightColumnLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/m1"
-                    android:orientation="vertical" >
-                </LinearLayout>
-            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 

@@ -175,5 +175,11 @@
     <string name="registration_failed_title">Registration failed</string>
     <string name="connection_check_text">Please, check your internet connection and try again later</string>
     <string name="empty_fields">Fill in shows title and quote text</string>
+    <string name="connection">Connecting</string>
+    <string name="connection_posting_quote">Posting quote to database...</string>
+    <string name="connection_loading_quote">Loading quotes...</string>
+    <string name="quote_season">Season</string>
+    <string name="quote_episode">Episode</string>
+    <string name="quote_by">by</string>
 
 </resources>

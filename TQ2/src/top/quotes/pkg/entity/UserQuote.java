@@ -9,11 +9,11 @@ public class UserQuote {
 	private int userId;
 	private String userName;
 	
-	public String getQuote() {
+	public String getText() {
 		return quote;
 	}
 
-	public UserQuote setQuote(String quote) {
+	public UserQuote setText(String quote) {
 		this.quote = quote;
 		return this;
 	}
