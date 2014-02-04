@@ -1,6 +1,7 @@
 package top.quotes.pkg.adapters;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import top.quotes.pkg.R;
 import top.quotes.pkg.data.Quote;
@@ -26,13 +27,15 @@ public class QuoteListAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater = null;
 
-	private String title;
-	private ArrayList<Quote> quotesList;
+	private List<String>  titlesList;
+	private List<Quote> quotesList;
+	private boolean isShareable;
 
-	public QuoteListAdapter(Context context, String title, ArrayList<Quote> quotesList) {
+	public QuoteListAdapter(Context context, ArrayList<String> titlesList, ArrayList<Quote> quotesList, boolean isShareable) {
 		this.context = context;
-		this.title = title;
+		this.titlesList = titlesList;
 		this.quotesList = quotesList;
+		this.isShareable = isShareable;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -73,7 +76,7 @@ public class QuoteListAdapter extends BaseAdapter {
 
 		final Quote quote = quotesList.get(position);
 		quoteText.setText(quote.getText());
-		showTitle.setText(title);
+		showTitle.setText(titlesList.get(position));
 		ratingBar.setRating(QuoteRatingsProvider.getFloatRating(quote.getRating()));
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
@@ -83,13 +86,24 @@ public class QuoteListAdapter extends BaseAdapter {
 				QuoteRatingsProvider.setQuoteRating(quote.getText(), quote.getRating());
 			}
 		});
-		shareButton.setOnClickListener(new View.OnClickListener() {
+		if (isShareable) {
+			shareButton.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				shareQuote(context, title, quote.getText());
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					shareQuote(context, titlesList.get(position), quote.getText());
+				}
+			});
+		} else {
+			shareButton.setVisibility(View.GONE);
+			contentLayout.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					shareQuote(context, titlesList.get(position), quote.getText());
+				}
+			});
+		}
 
 		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 0, 0, 1);
