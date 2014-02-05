@@ -51,7 +51,7 @@ public class NewQuoteScreen extends SherlockActivity {
 		episodeText = (EditText) findViewById(R.id.NewQuoteScreen_episodeText);
 		
 		languageSpinner = (Spinner) findViewById(R.id.NewQuoteScreen_languageSpinner);
-		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(this, R.array.language_list, R.layout.sherlock_spinner_item);
+		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(this, R.array.language_list_full, R.layout.sherlock_spinner_item);
 		listAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
 		languageSpinner.setAdapter(listAdapter);
 		

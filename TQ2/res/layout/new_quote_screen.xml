@@ -98,10 +98,25 @@
                 android:maxLength="2" />
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/NewQuoteScreen_languageSpinner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/text_quotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/m3"
+                android:text="@string/user_quote_lang"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:typeface="serif" />
+
+            <Spinner
+                android:id="@+id/NewQuoteScreen_languageSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

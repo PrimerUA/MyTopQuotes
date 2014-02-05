@@ -9,10 +9,11 @@
     <LinearLayout
         android:id="@+id/NewsScreen_contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
         android:layout_margin="@dimen/m10"
         android:background="@drawable/quote_border_pink"
-        android:gravity="center"
         android:orientation="vertical" >
 
         <LinearLayout

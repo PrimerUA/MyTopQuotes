@@ -110,7 +110,7 @@ public class QuoteListAdapter extends BaseAdapter {
 	private static void shareQuote(Context context, String title, String quote) {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody = quote + context.getString(R.string.share_text) + " - " + title;
+		String shareBody = quote + " " + context.getString(R.string.share_text) + " - " + title;
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 		context.startActivity(Intent.createChooser(sharingIntent, context.getString(R.string.share_with)));
 	}

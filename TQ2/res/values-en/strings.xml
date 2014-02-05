@@ -86,6 +86,11 @@
         <item>RUS</item>
         <item>ENG</item>
     </string-array>
+    <string-array name="language_list_full">
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
+    
 
     <string name="score">Score:</string>
     <string name="attempts">Attempts:</string>
@@ -101,7 +106,7 @@
     <string name="clear_scores">Clear table</string>
     <string name="switch_language_rus">РУС</string>
     <string name="switch_language_eng">ENG</string>
-    <string name="share_text"> Top Quotes for Android http://goo.gl/uuyUC</string>
+    <string name="share_text">(@top_quotes_apps) Top Quotes for Android http://goo.gl/uuyUC</string>
     <string name="share_with">Share with:</string>
     <string name="exit_title">Already leaving?</string>
     <string name="exit_text">Wish you a nice day!</string>
@@ -145,7 +150,7 @@
     <string name="rate_content_text">Please, rate Top Quotes with 5 stars. You can also tell us which show to add in your comment on Google Play:)</string>
     <string name="more_screen_title">More from developer</string>
     <string name="welcome_screen_main_title">Welcome to\nTop Quotes!</string>
-    <string name="welcome_screen_main_text">This app has a collection of 30 awesome TV shows with thousands of best quotes. Add them to Favourites list and enjoy the random Quotes Stream on the main page</string>
+    <string name="welcome_screen_main_text">This app has a collection of 30 awesome TV shows with thousands of best quotes. Read other users quotes or add your own from your favourite TV show and read them in Quote Stream</string>
     <string name="welcome_screen_shows_title">Shows menu</string>
     <string name="welcome_screen_shows_text">Swipe your screen from left to right and enter the sliding shows menu</string>
     <string name="welcome_screen_quiz_title">Enjoy the quiz</string>
@@ -177,6 +182,7 @@
     <string name="user_quote_confirm_dialog_text">Post this new quote to stream?</string>
     <string name="user_quote_confirm_dialog_confirm">YES!</string>
     <string name="user_quote_failed_title">Failed to post quote</string>
+    <string name="user_quote_lang">Quote language:</string>
     <string name="registration_failed_title">Registration failed</string>
     <string name="connection_check_text">Please, check your internet connection and try again later</string>
     <string name="empty_fields">Fill in shows title and quote text</string>

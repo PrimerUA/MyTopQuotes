@@ -88,6 +88,10 @@
         <item>РУС</item>
         <item>АНГЛ</item>
     </string-array>
+    <string-array name="language_list_full">
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
 
     <string name="add_button">Загрузить еще</string>
     <string name="score">Очки:</string>
@@ -104,7 +108,7 @@
     <string name="clear_scores">Очистить рекорды</string>
     <string name="switch_language_rus">РУС</string>
     <string name="switch_language_eng">ENG</string>
-    <string name="share_text"> Top Quotes для Андроид http://goo.gl/uuyUC</string>
+    <string name="share_text">(@top_quotes_apps) Top Quotes для Андроид http://goo.gl/uuyUC</string>
     <string name="share_with">Поделиться с помощью:</string>
     <string name="exit_title">Вы уверены что хотите выйти?</string>
     <string name="exit_text">Желаем Вам приятного дня!</string>
@@ -149,7 +153,7 @@
     <string name="rate_content_text">Если Вам понравился цитатник Top Quotes, пожалуйста, оцените его в 5 звезд на следующем экране. Вы также можете указать какой сериал стоит в дальнейшем добавить в Вашем отзыве:)</string>
     <string name="more_screen_title">Еще от автора</string>
     <string name="welcome_screen_main_title">Добро пожаловать в\nTop Quotes!</string>
-    <string name="welcome_screen_main_text">В этом приложении собраны лучшие цитаты из 30 Ваших самых любимых сериалов. Добавляйте цитаты в список избранных, а также наслаждайтесь потоком цитат на главном экране</string>
+    <string name="welcome_screen_main_text">В этом приложении собраны лучшие цитаты из 30 Ваших самых любимых сериалов. Читайте цитаты других пользователей либо добавляйте свои из Ваших любимых сериалов</string>
     <string name="welcome_screen_shows_title">Меню сериалов</string>
     <string name="welcome_screen_shows_text">Проведите пальцем по экрану слева на право чтобы открыть меню выбора сериалов</string>
     <string name="welcome_screen_quiz_title">Играйте в Викторину</string>
@@ -181,6 +185,7 @@
     <string name="user_quote_confirm_dialog_text">Отправить эту цитату в общий Поток?</string>
     <string name="user_quote_confirm_dialog_confirm">ДА!</string>
     <string name="user_quote_failed_title">Не удалось отправить цитату</string>
+    <string name="user_quote_lang">Язык цитаты:</string>
     <string name="registration_failed_title">Не удалось авторизироваться</string>
     <string name="connection_check_text">Пожалуйста, проверьте Ваше интернет соединение и попытайтесь снова</string>
     <string name="empty_fields">Поля название сериала и цитата должны быть заполнены</string>
@@ -197,5 +202,6 @@
     <string name="news_screen_text_block_1">VitaSolution - зарабатывайте РЕАЛЬНЫЕ деньги помогая другим людям решить их повседневные задачи или ответить на вопросы. Нажмите это сообщения чтобы начать прямо сейчас</string>
     <string name="news_screen_block_2">Цитаты теперь Вконтакте</string>
     <string name="news_screen_text_block_2">Присоединяйтесь к нашему сообществу Вконтакте и приглашайте друзей. Цитаты добавленные Вами в приложение также будут отображатся на стене сообщества от Вашего имени</string>
+    
 
 </resources>

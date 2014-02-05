@@ -22,7 +22,6 @@ public class UserQuoteListAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater = null;
 
-	private String title;
 	private ArrayList<UserQuote> quotesList;
 	private boolean isShareable;
 
@@ -79,7 +78,7 @@ public class UserQuoteListAdapter extends BaseAdapter {
 
 				@Override
 				public void onClick(View v) {
-					shareQuote(context, title, quote.getText());
+					shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
 				}
 			});
 		} else {
@@ -88,7 +87,7 @@ public class UserQuoteListAdapter extends BaseAdapter {
 
 				@Override
 				public void onClick(View v) {
-					shareQuote(context, title, quote.getText());
+					shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
 				}
 			});
 		}
@@ -99,7 +98,7 @@ public class UserQuoteListAdapter extends BaseAdapter {
 	private static void shareQuote(Context context, String title, String quote) {
 		Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
-		String shareBody = quote + context.getString(R.string.share_text) + " - " + title;
+		String shareBody = quote + " " + context.getString(R.string.share_text) + " - " + title;
 		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 		context.startActivity(Intent.createChooser(sharingIntent, context.getString(R.string.share_with)));
 	}
