@@ -2,17 +2,16 @@ package top.quotes.pkg.entity;
 
 public class User {
 
+	private String name;
+	private String email;
 	private boolean loggedIn = false;
 	private static User instance = null;
 	private int id = -1;
-	private String name;
-	private String email;
-	
+
 	public static User getInstance() {
 		if (instance == null)
-			return new User();
-		else
-			return instance;
+			instance = new User();
+		return instance;
 	}
 
 	private User() {
