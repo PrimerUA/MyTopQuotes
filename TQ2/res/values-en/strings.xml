@@ -131,11 +131,16 @@
     <string name="more_95q">95 Quarter</string>
     <string name="more_vk">Android [VK group]</string>
     <string name="more_blog">Visit my blog</string>
+    <string name="more_archangel">Archangel Web Studio</string>
+    <string name="more_vitasolution">VitaSolution</string>
+    <string name="more_archangel_text">Starting your own business? You need a site for that! Refer to professional</string>
+    <string name="more_vitasolution_text">Cash your knowledge - earn money by helping others solve their issues</string>
     <string name="more_truth_text">Unique game which will help you to better know your friends</string>
     <string name="more_vitacode_text">Decode yours and friends ringtones. Discover new sounds and more</string>
     <string name="more_quarter_text">Endless humour from Studio 95 Kiev. Russian speakers only</string>
     <string name="more_blog_text">Visit developers blog for more info about mobile apps, music, travelling, sports, lifestyle and more!</string>
     <string name="more_vk_text">All Android news here. Vk.com group. Russian speakers only. Subscribe!</string>
+    <string name="more_vktq_button">Top Quotes on Vk.com</string>
     <string name="rate_title_text">Rate Top Quotes</string>
     <string name="rate_content_text">Please, rate Top Quotes with 5 stars. You can also tell us which show to add in your comment on Google Play:)</string>
     <string name="more_screen_title">More from developer</string>

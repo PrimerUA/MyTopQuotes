@@ -30,6 +30,7 @@ public class UserQuoteListAdapter extends BaseAdapter {
 	public UserQuoteListAdapter(Context context, ArrayList<UserQuote> quotesList, boolean isShareable) {
 		this.context = context;
 		this.isShareable = isShareable;
+		this.quotesList = quotesList;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 

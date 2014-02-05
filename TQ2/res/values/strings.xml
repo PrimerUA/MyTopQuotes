@@ -135,11 +135,16 @@
     <string name="more_95q">Вечерний Квартал</string>
     <string name="more_vk">Наша группа Вконтакте</string>
     <string name="more_blog">Блог разработчика</string>
+    <string name="more_archangel">Archangel Веб-студия</string>
+    <string name="more_vitasolution">VitaSolution</string>
+    <string name="more_archangel_text">Начинаете свой бизнес? С сайтом Вы найдете больше клиентов! Обращайтесь к професcионалам</string>
+    <string name="more_vitasolution_text">Ваши знания умеют делать деньги - зарабатывайте, помогая другим решить их вопросы и задачи</string>
     <string name="more_truth_text">Собрались компанией друзей? Узнайте всю правду о них с помощью уникальной этой игры</string>
     <string name="more_vitacode_text">Разшифруй свой номер мобильного - узнай как он звучит</string>
     <string name="more_quarter_text">Бесконечный заряд позитива от студии Квартал 95 Киев!</string>
     <string name="more_blog_text">Новости, статьи об Андроид, путешествиях, бесплатная музыка и многое другое в этом блоге</string>
     <string name="more_vk_text">Все про Андроид здесь. Множество обзоров, подарков и полезной информации. Подписывайтесь!</string>
+    <string name="more_vktq_button">Top Quotes Вконтакте</string>
     <string name="rate_title_text">Оцените Top Quotes</string>
     <string name="rate_content_text">Если Вам понравился цитатник Top Quotes, пожалуйста, оцените его в 5 звезд на следующем экране. Вы также можете указать какой сериал стоит в дальнейшем добавить в Вашем отзыве:)</string>
     <string name="more_screen_title">Еще от автора</string>

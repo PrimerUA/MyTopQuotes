@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MoreScreen extends Activity {
@@ -17,8 +18,11 @@ public class MoreScreen extends Activity {
 	private LinearLayout blogLayout;
 	private LinearLayout vkLayout;
 	private LinearLayout brainLayout;
+	private LinearLayout archangelLayout;
+	private LinearLayout vitasolutionLayout;
 
 	private LinearLayout contentLayout;
+	private Button vkButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,10 @@ public class MoreScreen extends Activity {
 		blogLayout = (LinearLayout) findViewById(R.id.MoreScreen_blogLayout);
 		vkLayout = (LinearLayout) findViewById(R.id.MoreScreen_vkLayout);
 		brainLayout = (LinearLayout) findViewById(R.id.MoreScreen_brainLayout);
+		archangelLayout = (LinearLayout) findViewById(R.id.MoreScreen_archangelLayout);
+		vitasolutionLayout = (LinearLayout) findViewById(R.id.MoreScreen_vitasolutionLayout);
+		
+		vkButton = (Button) findViewById(R.id.MoreScreen_vkButton);
 
 		truthLayout.setOnClickListener(new OnClickListener() {
 			@Override
@@ -82,6 +90,30 @@ public class MoreScreen extends Activity {
 			@Override
 			public void onClick(View v) {
 				visitUrl("http://vk.com/liveindroid");
+			}
+		});
+		
+		archangelLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				visitUrl("http://arhangel-studio.com.ua/");
+			}
+		});
+		
+		vitasolutionLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				visitUrl("https://play.google.com/store/apps/details?id=com.primerworldapps.vitasolution");
+			}
+		});
+		
+		vkButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				visitUrl("http://vk.com/top_quotes_apps");
 			}
 		});
 
