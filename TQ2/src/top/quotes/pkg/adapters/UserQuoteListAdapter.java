@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class UserQuoteListAdapter extends BaseAdapter {
@@ -93,10 +92,6 @@ public class UserQuoteListAdapter extends BaseAdapter {
 				}
 			});
 		}
-
-		LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(0, 0, 0, 1);
-		view.setLayoutParams(params);
 
 		return view;
 	}
