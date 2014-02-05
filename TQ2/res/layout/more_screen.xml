@@ -378,6 +378,8 @@
         android:id="@+id/MoreScreen_vkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/vkontakte"
         android:text="@string/more_vktq_button" />
 
 </LinearLayout>

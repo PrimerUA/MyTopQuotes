@@ -48,5 +48,4 @@ public class WelcomeScreen extends Activity {
 		Toast.makeText(this, getString(R.string.welcome_screen_toast),
 				Toast.LENGTH_SHORT).show();
 	}
-
 }

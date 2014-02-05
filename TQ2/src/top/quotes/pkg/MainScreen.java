@@ -16,6 +16,7 @@ import top.quotes.pkg.util.providers.QuoteRatingsProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -81,13 +82,23 @@ public class MainScreen extends SherlockFragmentActivity {
 		adView = new AdView(this, AdSize.SMART_BANNER, getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
 		adView.loadAd(new AdRequest());
-
+		
+		SharedPreferences.Editor editor = prefs.edit();
 		if (isFirstLauch()) {
-			SharedPreferences.Editor editor = prefs.edit();
 			editor.putBoolean("firstLaunch", false);
 			editor.putBoolean("loggedIn", false);
 			editor.commit();
 			startActivity(new Intent(this, WelcomeScreen.class));
+		}
+		try {
+			int currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+			if(currentVersion > prefs.getInt("version", 0)) {
+				editor.putInt("version", currentVersion);
+				editor.commit();
+				startActivity(new Intent(this, NewsScreen.class));
+			}
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
 		}
 
 		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {

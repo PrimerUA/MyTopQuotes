@@ -191,5 +191,11 @@
     <string name="quote_episode">Эпизод</string>
     <string name="quote_by">от</string>
     <string name="all_items_loaded">Конец списка</string>
+    <string name="news_screen_title">Новости этой версии</string>
+    <string name="news_screen_text">Теперь Вы можете добавлять свои цитаты в Поток цитат! Просто нажмите кнопку Добавить свою цитату и заполните все поля. Для этого Вам необходимо интернет соединение</string>
+    <string name="news_screen_block_1">Наш новый проект</string>
+    <string name="news_screen_text_block_1">VitaSolution - зарабатывайте РЕАЛЬНЫЕ деньги помогая другим людям решить их повседневные задачи или ответить на вопросы. Нажмите это сообщения чтобы начать прямо сейчас</string>
+    <string name="news_screen_block_2">Цитаты теперь Вконтакте</string>
+    <string name="news_screen_text_block_2">Присоединяйтесь к нашему сообществу Вконтакте и приглашайте друзей. Цитаты добавленные Вами в приложение также будут отображатся на стене сообщества от Вашего имени</string>
 
 </resources>
