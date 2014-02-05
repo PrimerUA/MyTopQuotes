@@ -127,9 +127,9 @@ public class MainFragment extends CoreFragment {
 		isEndLeft = false;
 		isEndRight = false;
 		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
-			userQuotesList = new Executor().list(0, itemsQuantity, LanguageController.getCurrentLanguage());
+			userQuotesList = new Executor().list(0, itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
 			leftList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
-			userQuotesList = new Executor().list(itemsQuantity, itemsQuantity * 2, LanguageController.getCurrentLanguage());
+			userQuotesList = new Executor().list(itemsQuantity, itemsQuantity * 2, LanguageController.getCurrentLanguage().ordinal());
 			rightList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
 		} else {
 			updateQuoteList(itemsQuantity);
@@ -194,8 +194,8 @@ public class MainFragment extends CoreFragment {
 			itemsQuantity = 5;
 		}
 		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
-			List<UserQuote> newPostsLeft = new Executor().list(userQuotesList.size(), itemsQuantity, LanguageController.getCurrentLanguage());
-			List<UserQuote> newPostsRight = new Executor().list(userQuotesList.size() + itemsQuantity, itemsQuantity, LanguageController.getCurrentLanguage());
+			List<UserQuote> newPostsLeft = new Executor().list(userQuotesList.size(), itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
+			List<UserQuote> newPostsRight = new Executor().list(userQuotesList.size() + itemsQuantity, itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
 			if (newPostsLeft.size() == 0) {
 				isEndLeft = true;
 				Toast.makeText(getActivity(), getString(R.string.all_items_loaded), Toast.LENGTH_SHORT).show();
