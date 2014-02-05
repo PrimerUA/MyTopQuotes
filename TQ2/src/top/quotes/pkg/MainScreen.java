@@ -84,12 +84,6 @@ public class MainScreen extends SherlockFragmentActivity {
 		adView.loadAd(new AdRequest());
 		
 		SharedPreferences.Editor editor = prefs.edit();
-		if (isFirstLauch()) {
-			editor.putBoolean("firstLaunch", false);
-			editor.putBoolean("loggedIn", false);
-			editor.commit();
-			startActivity(new Intent(this, WelcomeScreen.class));
-		}
 		try {
 			int currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
 			if(currentVersion > prefs.getInt("version", 0)) {
@@ -99,6 +93,13 @@ public class MainScreen extends SherlockFragmentActivity {
 			}
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
+		}
+		
+		if (isFirstLauch()) {
+			editor.putBoolean("firstLaunch", false);
+			editor.putBoolean("loggedIn", false);
+			editor.commit();
+			startActivity(new Intent(this, WelcomeScreen.class));
 		}
 
 		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {

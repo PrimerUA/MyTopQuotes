@@ -19,6 +19,25 @@
         android:orientation="vertical" >
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/MainFragment_newQuoteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/user_quote_add" />
+
+            <ImageButton
+                android:id="@+id/MainFragment_refreshButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_popup_sync" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1" >
@@ -38,6 +57,7 @@
             </ListView>
 
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

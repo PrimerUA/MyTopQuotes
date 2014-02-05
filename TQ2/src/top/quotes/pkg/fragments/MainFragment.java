@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import top.quotes.pkg.NewQuoteScreen;
 import top.quotes.pkg.R;
 import top.quotes.pkg.adapters.QuoteListAdapter;
 import top.quotes.pkg.adapters.UserQuoteListAdapter;
@@ -17,18 +18,22 @@ import top.quotes.pkg.util.controllers.LanguageController;
 import top.quotes.pkg.util.controllers.LanguageController.LanguageChanger;
 import top.quotes.pkg.util.providers.ConnectionProvider;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainFragment extends CoreFragment {
+public class MainFragment extends CoreFragment implements OnClickListener {
 
 	private View rootView;
 
@@ -40,6 +45,9 @@ public class MainFragment extends CoreFragment {
 	private List<UserQuote> userQuotesList;
 	private List<Quote> quotesList;
 	private List<String> titlesList;
+
+	private Button newQuoteButton;
+	private ImageButton refreshButton;
 
 	private boolean isEndLeft;
 	private boolean isEndRight;
@@ -82,6 +90,10 @@ public class MainFragment extends CoreFragment {
 		quotesList = new ArrayList<Quote>();
 		userQuotesList = new ArrayList<UserQuote>();
 		titlesList = new ArrayList<String>();
+
+		newQuoteButton = (Button) rootView.findViewById(R.id.MainFragment_newQuoteButton);
+		newQuoteButton.setOnClickListener(this);
+		refreshButton.setOnClickListener(this);
 
 		leftList = (ListView) rootView.findViewById(R.id.MainFragment_leftList);
 		rightList = (ListView) rootView.findViewById(R.id.MainFragment_rightList);
@@ -127,11 +139,15 @@ public class MainFragment extends CoreFragment {
 		isEndLeft = false;
 		isEndRight = false;
 		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
+			newQuoteButton.setVisibility(View.VISIBLE);
+			refreshButton.setVisibility(View.VISIBLE);
 			userQuotesList = new Executor().list(0, itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
 			leftList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
 			userQuotesList = new Executor().list(itemsQuantity, itemsQuantity * 2, LanguageController.getCurrentLanguage().ordinal());
 			rightList.setAdapter(new UserQuoteListAdapter(getActivity(), (ArrayList<UserQuote>) userQuotesList, false));
 		} else {
+			newQuoteButton.setVisibility(View.GONE);
+			refreshButton.setVisibility(View.GONE);
 			updateQuoteList(itemsQuantity);
 			leftList.setAdapter(new QuoteListAdapter(getActivity(), (ArrayList<String>) titlesList, (ArrayList<Quote>) quotesList, false));
 			rightList.setAdapter(new QuoteListAdapter(getActivity(), (ArrayList<String>) titlesList, (ArrayList<Quote>) quotesList, false));
@@ -195,7 +211,8 @@ public class MainFragment extends CoreFragment {
 		}
 		if (ConnectionProvider.isConnectionAvailable(getActivity())) {
 			List<UserQuote> newPostsLeft = new Executor().list(userQuotesList.size(), itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
-			List<UserQuote> newPostsRight = new Executor().list(userQuotesList.size() + itemsQuantity, itemsQuantity, LanguageController.getCurrentLanguage().ordinal());
+			List<UserQuote> newPostsRight = new Executor().list(userQuotesList.size() + itemsQuantity, itemsQuantity, LanguageController.getCurrentLanguage()
+					.ordinal());
 			if (newPostsLeft.size() == 0) {
 				isEndLeft = true;
 				Toast.makeText(getActivity(), getString(R.string.all_items_loaded), Toast.LENGTH_SHORT).show();
@@ -213,7 +230,6 @@ public class MainFragment extends CoreFragment {
 			((QuoteListAdapter) leftList.getAdapter()).notifyDataSetChanged();
 			((QuoteListAdapter) rightList.getAdapter()).notifyDataSetChanged();
 		}
-
 	}
 
 	private void updateQuoteList(int itemsQuantity) {
@@ -223,6 +239,18 @@ public class MainFragment extends CoreFragment {
 			Quote quote = show.getQuote(new Random().nextInt(ShowsList.getList().size()), LanguageController.getCurrentLanguage());
 			if (!quotesList.contains(quote))
 				quotesList.add(quote);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.MainFragment_newQuoteButton:
+			startActivity(new Intent(getActivity(), NewQuoteScreen.class));
+			break;
+		case R.id.MainFragment_refreshButton:
+			addQuotesOnScreen();
+			break;
 		}
 	}
 

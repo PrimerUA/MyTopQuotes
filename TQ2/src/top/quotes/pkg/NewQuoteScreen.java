@@ -60,7 +60,7 @@ public class NewQuoteScreen extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				if ("".equals(titleText.getText().toString()) || "".equals(quoteText.getText().toString()))
+				if (!"".equals(titleText.getText().toString()) || !"".equals(quoteText.getText().toString()))
 					showConfirmationDialog();
 				else
 					Toast.makeText(NewQuoteScreen.this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
@@ -154,6 +154,7 @@ public class NewQuoteScreen extends SherlockActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				quoteText.getText().clear();
 				dialog.dismiss();
 			}
 		});
