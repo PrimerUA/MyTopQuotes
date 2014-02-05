@@ -118,7 +118,7 @@ public class MainFragment extends CoreFragment {
 
 	private void doLoadContent() {
 		int itemsQuantity = 0;
-		boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+		boolean tabletSize = getActivity().getResources().getBoolean(R.bool.isTablet);
 		if (tabletSize) {
 			itemsQuantity = 25;
 		} else {
