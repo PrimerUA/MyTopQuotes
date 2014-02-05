@@ -93,6 +93,7 @@ public class MainFragment extends CoreFragment implements OnClickListener {
 
 		newQuoteButton = (Button) rootView.findViewById(R.id.MainFragment_newQuoteButton);
 		newQuoteButton.setOnClickListener(this);
+		refreshButton = (ImageButton) rootView.findViewById(R.id.MainFragment_refreshButton);
 		refreshButton.setOnClickListener(this);
 
 		leftList = (ListView) rootView.findViewById(R.id.MainFragment_leftList);
