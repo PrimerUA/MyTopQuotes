@@ -26,7 +26,7 @@ import top.quotes.pkg.entity.UserQuote;
 public class Executor {
 
 	private Gson gson = new Gson();
-	private final static String url = "http://topquotes-test.esy.es/";
+	private final static String url = "http://tq.svit.co/";
 
 	public int register(User user) {
 		try {
