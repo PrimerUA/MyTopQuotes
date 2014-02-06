@@ -70,14 +70,15 @@ public class MainScreen extends SherlockFragmentActivity {
 		DailyNotificationController.initNotification(this);
 		AppRater.app_launched(this);
 
+		advView = AdvView.create(this,  getString(R.string.ivengo_publisher_id)); // "test"); getString(R.string.ivengo_publisher_id)
+		advView.showBanner();
+		
 		initScreen();
 		setDrawerPanel(savedInstanceState);
 		setActionBar();
 
 		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new MainFragment()).commit();
 
-		advView = AdvView.create(this, getString(R.string.ivengo_publisher_id)); // "test");
-		advView.showBanner();
 
 		adView = new AdView(this, AdSize.SMART_BANNER, getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);

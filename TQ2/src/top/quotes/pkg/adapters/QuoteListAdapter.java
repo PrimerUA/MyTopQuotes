@@ -26,16 +26,15 @@ public class QuoteListAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater = null;
 
-	private List<String>  titlesList;
+	private List<String> titlesList;
 	private List<Quote> quotesList;
-	private boolean isShareable;
 
-	public QuoteListAdapter(Context context, ArrayList<String> titlesList, ArrayList<Quote> quotesList, boolean isShareable) {
+	public QuoteListAdapter(Context context, ArrayList<String> titlesList, ArrayList<Quote> quotesList) {
 		this.context = context;
 		this.titlesList = titlesList;
 		this.quotesList = quotesList;
-		this.isShareable = isShareable;
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		if (context != null)
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -85,24 +84,13 @@ public class QuoteListAdapter extends BaseAdapter {
 				QuoteRatingsProvider.setQuoteRating(quote.getText(), quote.getRating());
 			}
 		});
-		if (isShareable) {
-			shareButton.setOnClickListener(new View.OnClickListener() {
+		shareButton.setOnClickListener(new View.OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					shareQuote(context, titlesList.get(position), quote.getText());
-				}
-			});
-		} else {
-			shareButton.setVisibility(View.GONE);
-			contentLayout.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					shareQuote(context, titlesList.get(position), quote.getText());
-				}
-			});
-		}
+			@Override
+			public void onClick(View v) {
+				shareQuote(context, titlesList.get(position), quote.getText());
+			}
+		});
 
 		return view;
 	}

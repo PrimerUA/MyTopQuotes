@@ -23,11 +23,9 @@ public class UserQuoteListAdapter extends BaseAdapter {
 	private LayoutInflater inflater = null;
 
 	private ArrayList<UserQuote> quotesList;
-	private boolean isShareable;
 
-	public UserQuoteListAdapter(Context context, ArrayList<UserQuote> quotesList, boolean isShareable) {
+	public UserQuoteListAdapter(Context context, ArrayList<UserQuote> quotesList) {
 		this.context = context;
-		this.isShareable = isShareable;
 		this.quotesList = quotesList;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -71,26 +69,29 @@ public class UserQuoteListAdapter extends BaseAdapter {
 		final UserQuote quote = quotesList.get(position);
 		quoteText.setText(quote.getText());
 		showTitle.setText(quote.getTitle());
-		seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + quote.getSeason() +", " + context.getString(R.string.quote_episode) + " " + quote.getEpisode());
-		authorText.setText(context.getString(R.string.quote_by) + " " + quote.getUserName());
-		if (isShareable) {
-			shareButton.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
-				}
-			});
-		} else {
-			shareButton.setVisibility(View.GONE);
-			contentLayout.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
-				}
-			});
+		if (quote.getSeason() == 0) {
+			seasonEpisodeText.setVisibility(View.VISIBLE);
+			seasonEpisodeText.setText(context.getString(R.string.quote_episode) + " " + quote.getEpisode());
 		}
+		if (quote.getEpisode() == 0) {
+			seasonEpisodeText.setVisibility(View.VISIBLE);
+			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + quote.getSeason());
+		}
+		if (quote.getSeason() != 0 && quote.getEpisode() != 0) {
+			seasonEpisodeText.setVisibility(View.VISIBLE);
+			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + quote.getSeason() + ", " + context.getString(R.string.quote_episode)
+					+ " " + quote.getEpisode());
+		}
+		if (quote.getSeason() == 0 && quote.getEpisode() == 0)
+			seasonEpisodeText.setVisibility(View.GONE);
+		authorText.setText(context.getString(R.string.quote_by) + " " + quote.getUserName());
+		shareButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
+			}
+		});
 
 		return view;
 	}

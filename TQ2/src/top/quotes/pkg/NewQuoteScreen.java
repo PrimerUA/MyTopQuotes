@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class NewQuoteScreen extends SherlockActivity {
 
@@ -49,12 +51,12 @@ public class NewQuoteScreen extends SherlockActivity {
 		quoteText = (EditText) findViewById(R.id.NewQuoteScreen_quoteText);
 		seasonText = (EditText) findViewById(R.id.NewQuoteScreen_seasonText);
 		episodeText = (EditText) findViewById(R.id.NewQuoteScreen_episodeText);
-		
+
 		languageSpinner = (Spinner) findViewById(R.id.NewQuoteScreen_languageSpinner);
 		ArrayAdapter<CharSequence> listAdapter = ArrayAdapter.createFromResource(this, R.array.language_list_full, R.layout.sherlock_spinner_item);
 		listAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
 		languageSpinner.setAdapter(listAdapter);
-		
+
 		addButton = (Button) findViewById(R.id.NewQuoteScreen_addButton);
 		addButton.setOnClickListener(new View.OnClickListener() {
 
@@ -109,9 +111,16 @@ public class NewQuoteScreen extends SherlockActivity {
 						User user = User.getInstance();
 						if (user.isLoggedIn() && user.getId() != -1) {
 							UserQuote quote = new UserQuote();
-							quote.setTitle(titleText.getText().toString()).setText(quoteText.getText().toString())
-									.setSeason(Integer.valueOf(seasonText.getText().toString())).setEpisode(Integer.valueOf(episodeText.getText().toString()))
-									.setUserId(user.getId()).setLanguage(languageSpinner.getSelectedItemPosition());
+							quote.setTitle(titleText.getText().toString()).setText(quoteText.getText().toString()).setUserId(user.getId())
+									.setLanguage(languageSpinner.getSelectedItemPosition());
+							if ("".equals(seasonText.getText().toString()))
+								quote.setSeason(0);
+							else
+								quote.setSeason(Integer.valueOf(seasonText.getText().toString()));
+							if ("".equals(episodeText.getText().toString()))
+								quote.setEpisode(0);
+							else
+								quote.setEpisode(Integer.valueOf(episodeText.getText().toString()));
 							if (new Executor().sendQuote(quote) == true) {
 								showSuccessDialog();
 							} else {
@@ -159,6 +168,26 @@ public class NewQuoteScreen extends SherlockActivity {
 			}
 		});
 		builder.show();
+	}
+
+	@Override
+	public void onBackPressed() {
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getSupportMenuInflater().inflate(R.menu.actionbar_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		default:
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }
