@@ -67,7 +67,6 @@ public class MainFragment extends CoreFragment implements OnClickListener {
 			}
 		});
 
-		addQuotesOnScreen();
 		return rootView;
 	}
 

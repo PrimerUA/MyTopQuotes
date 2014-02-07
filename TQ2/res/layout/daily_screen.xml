@@ -20,7 +20,8 @@
             android:text="@string/daily_screen_title"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"
-            android:typeface="serif" />
+            android:typeface="serif"
+            android:scrollbars="vertical" />
     </LinearLayout>
 
 </ScrollView>

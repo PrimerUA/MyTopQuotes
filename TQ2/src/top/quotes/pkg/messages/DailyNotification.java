@@ -19,6 +19,7 @@ public class DailyNotification {
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		Intent dailyQuoteIntent = new Intent(context, DailyScreen.class);
+		dailyQuoteIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
 		DailyQuote dailyQuote = QuoteViewsProvider.getDailyQuote();
 		dailyQuoteIntent.putExtra(ConstantsFacade.QUOTE_TITLE, dailyQuote.getShowTitle());

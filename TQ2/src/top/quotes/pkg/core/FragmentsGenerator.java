@@ -9,7 +9,7 @@ import top.quotes.pkg.fragments.ShowsFragment;
 import top.quotes.pkg.fragments.TopFragment;
 import android.os.Bundle;
 
-public class FragmentsCore {
+public class FragmentsGenerator {
 
     public static SherlockFragment generateFragment(int position) {
 	if (position == 0) {

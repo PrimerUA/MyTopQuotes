@@ -1,7 +1,7 @@
 package top.quotes.pkg;
 
 import top.quotes.pkg.constants.ConstantsFacade;
-import top.quotes.pkg.core.FragmentsCore;
+import top.quotes.pkg.core.FragmentsGenerator;
 import top.quotes.pkg.data.ShowsList;
 import top.quotes.pkg.entity.User;
 import top.quotes.pkg.fragments.MainFragment;
@@ -103,7 +103,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
 
-		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {
+		if ((!User.getInstance().isLoggedIn() || User.getInstance().getId() == -1) && ConnectionProvider.isConnectionAvailable(this)) {
 			startActivity(new Intent(this, AuthScreen.class));
 		}
 	}
@@ -221,7 +221,7 @@ public class MainScreen extends SherlockFragmentActivity {
 	}
 
 	private SherlockFragment selectItem(int position) {
-		return FragmentsCore.generateFragment(position);
+		return FragmentsGenerator.generateFragment(position);
 	}
 
 	@Override

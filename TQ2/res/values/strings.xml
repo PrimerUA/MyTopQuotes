@@ -111,7 +111,7 @@
     <string name="share_text">(@top_quotes_apps) Top Quotes для Андроид http://goo.gl/uuyUC</string>
     <string name="share_with">Поделиться с помощью:</string>
     <string name="exit_title">Вы уверены что хотите выйти?</string>
-    <string name="exit_text">Желаем Вам приятного дня!</string>
+    <string name="exit_text">Желаем Вам приятного дня! Возвращайтесь скорее и расскажите друзьям об этом приложении:)</string>
     <string name="rate_app">Оценить</string>
     <string name="retry_quiz">Начать заново</string>
     <string name="clear_rating">Очистить рейтинг</string>
@@ -125,7 +125,7 @@
     <string name="language_rus">Русский</string>
     <string name="language_eng">Английский</string>
     <string name="more_title">Еще от автора</string>
-    <string name="daily_quote">Ежедневное уведомление с цитатой дня</string>
+    <string name="daily_quote">Цитата дня при запуске приложения</string>
     <string name="daily_screen_title">Цитата дня</string>
     <string name="please_rate">Если Вам нравится это приложение, пожалуйста оцените его. Благодарим за поддержку!</string>
     <string name="do_rate_it">Оценить Top Quotes</string>
@@ -186,6 +186,9 @@
     <string name="user_quote_confirm_dialog_confirm">ДА!</string>
     <string name="user_quote_failed_title">Не удалось отправить цитату</string>
     <string name="user_quote_lang">Язык цитаты:</string>
+    <string name="user_quote_cancel_title">Отменить добавление цитаты?</string>
+    <string name="user_quote_cancel_text">Подтвердите отмену добавления новой цитаты в общий Поток</string>
+    <string name="user_quote_lang">Язык цитаты:</string>
     <string name="registration_failed_title">Не удалось авторизироваться</string>
     <string name="connection_check_text">Пожалуйста, проверьте Ваше интернет соединение и попытайтесь снова</string>
     <string name="empty_fields">Поля название сериала и цитата должны быть заполнены</string>
@@ -202,6 +205,6 @@
     <string name="news_screen_text_block_1">VitaSolution - зарабатывайте РЕАЛЬНЫЕ деньги помогая другим людям решить их повседневные задачи или ответить на вопросы. Нажмите это сообщения чтобы начать прямо сейчас</string>
     <string name="news_screen_block_2">Цитаты теперь Вконтакте</string>
     <string name="news_screen_text_block_2">Присоединяйтесь к нашему сообществу Вконтакте и приглашайте друзей. Цитаты добавленные Вами в приложение также будут отображатся на стене сообщества от Вашего имени</string>
-    
+    <string name="loggined_as">Вход выполнен:</string>
 
 </resources>

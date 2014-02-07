@@ -109,7 +109,7 @@
     <string name="share_text">(@top_quotes_apps) Top Quotes for Android http://goo.gl/uuyUC</string>
     <string name="share_with">Share with:</string>
     <string name="exit_title">Already leaving?</string>
-    <string name="exit_text">Wish you a nice day!</string>
+    <string name="exit_text">Wish you a nice day! Come back soon and tell your friends about this app:)</string>
     <string name="rate_app">Rate</string>
     <string name="retry_quiz">Retry</string>
     <string name="clear_rating">Clear ratings</string>
@@ -123,7 +123,7 @@
     <string name="language_rus">Russian</string>
     <string name="language_eng">English</string>
     <string name="more_title">More</string>
-    <string name="daily_quote">Everyday notification with Quote of the day</string>
+    <string name="daily_quote">Show Quote of the day when app launched</string>
     <string name="daily_screen_title">Quote of the day</string>
     <string name="please_rate">If you like this app, please rate it. Thank you for your support!</string>
     <string name="do_rate_it">Rate Top Quotes</string>
@@ -183,6 +183,8 @@
     <string name="user_quote_confirm_dialog_confirm">YES!</string>
     <string name="user_quote_failed_title">Failed to post quote</string>
     <string name="user_quote_lang">Quote language:</string>
+    <string name="user_quote_cancel_title">Cancel adding new quote?</string>
+    <string name="user_quote_cancel_text">Confirm cancelling new quote</string>
     <string name="registration_failed_title">Registration failed</string>
     <string name="connection_check_text">Please, check your internet connection and try again later</string>
     <string name="empty_fields">Fill in shows title and quote text</string>
@@ -199,5 +201,5 @@
     <string name="news_screen_text_block_1">VitaSolution - is an innovative way to earn REAL money by simply helping other people solve their issues. Tap this message to start it right now</string>
     <string name="news_screen_block_2">Join Top Quotes on Vk.com</string>
     <string name="news_screen_text_block_2">We are now available on Vk social network. All your quotes will be shown here as well as in the Quote stream</string>
-
+<string name="loggined_as">Logged in as:</string>
 </resources>

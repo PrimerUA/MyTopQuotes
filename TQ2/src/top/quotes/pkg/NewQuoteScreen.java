@@ -62,7 +62,7 @@ public class NewQuoteScreen extends SherlockActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (!"".equals(titleText.getText().toString()) || !"".equals(quoteText.getText().toString()))
+				if (!"".equals(titleText.getText().toString()) && !"".equals(quoteText.getText().toString()))
 					showConfirmationDialog();
 				else
 					Toast.makeText(NewQuoteScreen.this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
@@ -170,9 +170,28 @@ public class NewQuoteScreen extends SherlockActivity {
 		builder.show();
 	}
 
-	@Override
 	public void onBackPressed() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.user_quote_cancel_title);
+		builder.setMessage(R.string.user_quote_cancel_text);
+		builder.setIcon(R.drawable.ic_launcher);
+		builder.setCancelable(true);
 
+		builder.setNegativeButton(android.R.string.no, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.setPositiveButton(R.string.user_quote_confirm_dialog_confirm, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				finish();
+			}
+		});
+		builder.show();
 	}
 
 	@Override
@@ -184,10 +203,14 @@ public class NewQuoteScreen extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.action_settings: {
+			Intent intent = new Intent(this, PreferencesScreen.class);
+			startActivity(intent);
+			break;
+		}
 		default:
 			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
