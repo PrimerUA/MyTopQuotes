@@ -2,6 +2,8 @@ package top.quotes.pkg.adapters;
 
 import java.util.ArrayList;
 
+import com.parse.ParseObject;
+
 import top.quotes.pkg.R;
 import top.quotes.pkg.entity.UserQuote;
 import top.quotes.pkg.util.PreferencesLoader;
@@ -22,9 +24,9 @@ public class UserQuoteListAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater = null;
 
-	private ArrayList<UserQuote> quotesList;
+	private ArrayList<ParseObject> quotesList;
 
-	public UserQuoteListAdapter(Context context, ArrayList<UserQuote> quotesList) {
+	public UserQuoteListAdapter(Context context, ArrayList<ParseObject> quotesList) {
 		this.context = context;
 		this.quotesList = quotesList;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,8 +53,8 @@ public class UserQuoteListAdapter extends BaseAdapter {
 		if (view == null)
 			view = inflater.inflate(R.layout.user_quote_item, null);
 
-		TextView quoteText = (TextView) view.findViewById(R.id.UserQuote_quoteText);
-		TextView showTitle = (TextView) view.findViewById(R.id.UserQuote_showTitle);
+		final TextView quoteText = (TextView) view.findViewById(R.id.UserQuote_quoteText);
+		final TextView showTitle = (TextView) view.findViewById(R.id.UserQuote_showTitle);
 		TextView seasonEpisodeText = (TextView) view.findViewById(R.id.UserQuote_seasonEpisodeText);
 		TextView authorText = (TextView) view.findViewById(R.id.UserQuote_authorText);
 		ImageButton shareButton = (ImageButton) view.findViewById(R.id.UserQuote_shareButton);
@@ -66,30 +68,33 @@ public class UserQuoteListAdapter extends BaseAdapter {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 		}
 
-		final UserQuote quote = quotesList.get(position);
-		quoteText.setText(quote.getText());
-		showTitle.setText(quote.getTitle());
-		if (quote.getSeason() == 0) {
+		final ParseObject quote = quotesList.get(position);
+		quoteText.setText(quote.get("text").toString());
+		showTitle.setText(quote.get("title").toString());
+		
+		int season = (Integer) quote.get("season");
+		int episode = (Integer) quote.get("episode");
+		if (season == 0) {
 			seasonEpisodeText.setVisibility(View.VISIBLE);
-			seasonEpisodeText.setText(context.getString(R.string.quote_episode) + " " + quote.getEpisode());
+			seasonEpisodeText.setText(context.getString(R.string.quote_episode) + " " + episode);
 		}
-		if (quote.getEpisode() == 0) {
+		if (episode == 0) {
 			seasonEpisodeText.setVisibility(View.VISIBLE);
-			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + quote.getSeason());
+			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + season);
 		}
-		if (quote.getSeason() != 0 && quote.getEpisode() != 0) {
+		if (season != 0 && episode != 0) {
 			seasonEpisodeText.setVisibility(View.VISIBLE);
-			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + quote.getSeason() + ", " + context.getString(R.string.quote_episode)
-					+ " " + quote.getEpisode());
+			seasonEpisodeText.setText(context.getString(R.string.quote_season) + " " + season + ", " + context.getString(R.string.quote_episode)
+					+ " " + episode);
 		}
-		if (quote.getSeason() == 0 && quote.getEpisode() == 0)
+		if (season == 0 && episode == 0)
 			seasonEpisodeText.setVisibility(View.GONE);
-		authorText.setText(context.getString(R.string.quote_by) + " " + quote.getUserName());
+		authorText.setText(context.getString(R.string.quote_by) + " " + quote.get("user").toString());
 		shareButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				shareQuote(context, quotesList.get(position).getTitle(), quote.getText());
+				shareQuote(context, showTitle.getText().toString(), quoteText.getText().toString());
 			}
 		});
 

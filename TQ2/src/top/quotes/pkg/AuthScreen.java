@@ -1,10 +1,10 @@
 package top.quotes.pkg;
 
 import top.quotes.pkg.entity.User;
-import top.quotes.pkg.server.Executor;
 import top.quotes.pkg.util.PreferencesLoader;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +19,13 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.PlusClient;
+import com.parse.LogInCallback;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
-public class AuthScreen extends SherlockActivity implements OnClickListener,
-		GooglePlayServicesClient.ConnectionCallbacks,
+public class AuthScreen extends SherlockActivity implements OnClickListener, GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener {
 
 	public static final int REQUEST_CODE_RESOLVE_ERR = 9000;
@@ -44,10 +48,8 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 		authImage = (ImageView) findViewById(R.id.auth_image);
 		authLayout = (LinearLayout) findViewById(R.id.auth_layout);
 
-		plusClient = new PlusClient.Builder(this, this, this)
-				.setScopes(Scopes.PLUS_LOGIN)
-				.setVisibleActivities("http://schemas.google.com/AddActivity",
-						"http://schemas.google.com/BuyActivity").build();
+		plusClient = new PlusClient.Builder(this, this, this).setScopes(Scopes.PLUS_LOGIN)
+				.setVisibleActivities("http://schemas.google.com/AddActivity", "http://schemas.google.com/BuyActivity").build();
 
 		loginButton = (SignInButton) findViewById(R.id.login_button);
 		loginButton.setOnClickListener(this);
@@ -59,52 +61,54 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 	public void onConnectionFailed(ConnectionResult result) {
 		if (result.hasResolution()) {
 			try {
-				result.startResolutionForResult((Activity) this,
-						REQUEST_CODE_RESOLVE_ERR);
+				result.startResolutionForResult((Activity) this, REQUEST_CODE_RESOLVE_ERR);
 				authImage.setVisibility(View.GONE);
 				authLayout.setBackgroundResource(R.drawable.w1);
 			} catch (IntentSender.SendIntentException e) {
 				plusClient.connect();
 			}
 		} else {
-			Toast.makeText(this,
-					"Connection failed. Error code: " + result.getErrorCode(),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Connection failed. Error code: " + result.getErrorCode(), Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		Toast.makeText(
-				this,
-				getString(R.string.google_connected) + "\n"
-						+ plusClient.getCurrentPerson().getDisplayName(),
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, getString(R.string.google_connected) + "\n" + plusClient.getCurrentPerson().getDisplayName(), Toast.LENGTH_SHORT).show();
 
-		User.getInstance().setName(
-				plusClient.getCurrentPerson().getDisplayName());
+		User.getInstance().setName(plusClient.getCurrentPerson().getDisplayName());
 		User.getInstance().setEmail(plusClient.getAccountName());
 
-		int userId = new Executor().register(User.getInstance());
-		if (userId != -1) {
-			User.getInstance().setId(userId);
-			User.getInstance().setLoggedIn(true);
-			PreferencesLoader.saveUserData();
-			finish();
-		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.registration_failed_title);
-			builder.setMessage(R.string.connection_check_text);
-			builder.setIcon(R.drawable.ic_launcher);
-			builder.setCancelable(true);
-			builder.show();
-		}
+		ParseUser user = new ParseUser();
+		user.setUsername(plusClient.getCurrentPerson().getDisplayName());
+		user.setEmail(plusClient.getAccountName());
+		user.setPassword("pass");
+		user.signUpInBackground(new SignUpCallback() {
+			public void done(ParseException e) {
+				ParseAnonymousUtils.logIn(new LogInCallback() {
+					@Override
+					public void done(ParseUser user, ParseException e) {
+						if (e == null) {
+							User.getInstance().setLoggedIn(true);
+							PreferencesLoader.saveUserData();
+							finish();
+						} else {
+							AlertDialog.Builder builder = new AlertDialog.Builder(AuthScreen.this);
+							builder.setTitle(R.string.registration_failed_title);
+							builder.setMessage(getString(R.string.connection_check_text) + " Error: " + e.getMessage());
+							builder.setIcon(R.drawable.ic_launcher);
+							builder.setCancelable(true);
+							builder.show();
+						}
+					}
+				});
+			}
+		});
 	}
 
 	@Override
 	public void onDisconnected() {
-		Toast.makeText(this, getString(R.string.google_disconnected),
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, getString(R.string.google_disconnected), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -116,8 +120,7 @@ public class AuthScreen extends SherlockActivity implements OnClickListener,
 
 	@Override
 	public void onBackPressed() {
-		Toast.makeText(this, getString(R.string.login_text), Toast.LENGTH_SHORT)
-				.show();
+		Toast.makeText(this, getString(R.string.login_text), Toast.LENGTH_SHORT).show();
 	}
 
 }

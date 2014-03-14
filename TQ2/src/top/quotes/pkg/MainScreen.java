@@ -6,7 +6,6 @@ import top.quotes.pkg.data.ShowsList;
 import top.quotes.pkg.entity.User;
 import top.quotes.pkg.fragments.MainFragment;
 import top.quotes.pkg.messages.ExitDialog;
-import top.quotes.pkg.util.AppRater;
 import top.quotes.pkg.util.PreferencesLoader;
 import top.quotes.pkg.util.controllers.BackgroundController;
 import top.quotes.pkg.util.controllers.DailyNotificationController;
@@ -39,7 +38,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
-import com.ivengo.adv.AdvView;
+import com.parse.ParseAnalytics;
 
 public class MainScreen extends SherlockFragmentActivity {
 
@@ -50,8 +49,6 @@ public class MainScreen extends SherlockFragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mShowsTitles;
-
-	private AdvView advView;
 
 	private AdView adView;
 
@@ -68,14 +65,12 @@ public class MainScreen extends SherlockFragmentActivity {
 		QuoteRatingsProvider.initRatings(this);
 		ShowsList.initShows(this);
 		DailyNotificationController.initNotification(this);
-		AppRater.app_launched(this);
-
-		advView = AdvView.create(this,  getString(R.string.ivengo_publisher_id)); // "test"); getString(R.string.ivengo_publisher_id)
-		advView.showBanner();
 		
 		initScreen();
 		setDrawerPanel(savedInstanceState);
 		setActionBar();
+		
+		ParseAnalytics.trackAppOpened(getIntent());
 
 		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new MainFragment()).commit();
 
@@ -103,7 +98,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
 
-		if ((!User.getInstance().isLoggedIn() || User.getInstance().getId() == -1) && ConnectionProvider.isConnectionAvailable(this)) {
+		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {
 			startActivity(new Intent(this, AuthScreen.class));
 		}
 	}
@@ -295,12 +290,6 @@ public class MainScreen extends SherlockFragmentActivity {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		advView.dismiss();
 	}
 
 }

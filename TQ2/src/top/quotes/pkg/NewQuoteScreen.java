@@ -2,7 +2,6 @@ package top.quotes.pkg;
 
 import top.quotes.pkg.entity.User;
 import top.quotes.pkg.entity.UserQuote;
-import top.quotes.pkg.server.Executor;
 import top.quotes.pkg.util.PreferencesLoader;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -21,6 +20,10 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class NewQuoteScreen extends SherlockActivity {
 
@@ -102,38 +105,30 @@ public class NewQuoteScreen extends SherlockActivity {
 	}
 
 	protected void doPostQuote() {
-		final ProgressDialog myProgressDialog = ProgressDialog.show(this, getString(R.string.connection), getString(R.string.connection_posting_quote), true);
-		new Thread() {
-			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						User user = User.getInstance();
-						if (user.isLoggedIn() && user.getId() != -1) {
-							UserQuote quote = new UserQuote();
-							quote.setTitle(titleText.getText().toString()).setText(quoteText.getText().toString()).setUserId(user.getId())
-									.setLanguage(languageSpinner.getSelectedItemPosition());
-							if ("".equals(seasonText.getText().toString()))
-								quote.setSeason(0);
-							else
-								quote.setSeason(Integer.valueOf(seasonText.getText().toString()));
-							if ("".equals(episodeText.getText().toString()))
-								quote.setEpisode(0);
-							else
-								quote.setEpisode(Integer.valueOf(episodeText.getText().toString()));
-							if (new Executor().sendQuote(quote) == true) {
-								showSuccessDialog();
-							} else {
-								showErrorDialog();
-							}
-						} else {
-							startActivity(new Intent(NewQuoteScreen.this, AuthScreen.class));
-						}
-					}
-				});
-				myProgressDialog.dismiss();
-			}
-		}.start();
+		User user = User.getInstance();
+		if (user.isLoggedIn()) {
+			final ProgressDialog myProgressDialog = ProgressDialog.show(this, getString(R.string.connection), getString(R.string.connection_posting_quote), true);
+			ParseObject userQuote = new ParseObject("UserQuote");
+			userQuote.put("title", titleText.getText().toString());
+			userQuote.put("text", quoteText.getText().toString());
+			userQuote.put("season", "".equals(seasonText.getText().toString()) ? 0 : seasonText.getText().toString());
+			userQuote.put("episode", "".equals(episodeText.getText().toString()) ? 0 : episodeText.getText().toString());
+			userQuote.put("language", languageSpinner.getSelectedItemPosition());
+			userQuote.put("user", ParseUser.getCurrentUser().getUsername());
+			userQuote.saveInBackground(new SaveCallback() {
+
+				@Override
+				public void done(ParseException e) {
+					myProgressDialog.dismiss();
+					if (e == null)
+						showSuccessDialog();
+					else
+						showErrorDialog();
+				}
+			});
+		} else {
+			startActivity(new Intent(NewQuoteScreen.this, AuthScreen.class));
+		}
 	}
 
 	private void showErrorDialog() {
