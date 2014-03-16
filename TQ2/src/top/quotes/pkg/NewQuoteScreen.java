@@ -72,9 +72,9 @@ public class NewQuoteScreen extends SherlockActivity {
 			}
 		});
 
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
@@ -98,43 +98,42 @@ public class NewQuoteScreen extends SherlockActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				doPostQuote();
+				if (ParseUser.getCurrentUser() != null && User.getInstance().isLoggedIn())
+					doPostQuote();
+				else
+					startActivity(new Intent(NewQuoteScreen.this, AuthScreen.class));
 			}
 		});
 		builder.show();
 	}
 
 	protected void doPostQuote() {
-		User user = User.getInstance();
-		if (user.isLoggedIn()) {
-			final ProgressDialog myProgressDialog = ProgressDialog.show(this, getString(R.string.connection), getString(R.string.connection_posting_quote), true);
-			ParseObject userQuote = new ParseObject("UserQuote");
-			userQuote.put("title", titleText.getText().toString());
-			userQuote.put("text", quoteText.getText().toString());
-			userQuote.put("season", "".equals(seasonText.getText().toString()) ? 0 : seasonText.getText().toString());
-			userQuote.put("episode", "".equals(episodeText.getText().toString()) ? 0 : episodeText.getText().toString());
-			userQuote.put("language", languageSpinner.getSelectedItemPosition());
-			userQuote.put("user", ParseUser.getCurrentUser().getUsername());
-			userQuote.saveInBackground(new SaveCallback() {
+		final ProgressDialog myProgressDialog = ProgressDialog.show(this, getString(R.string.connection), getString(R.string.connection_posting_quote), true);
+		ParseObject userQuote = new ParseObject("UserQuote");
+		userQuote.put("title", titleText.getText().toString());
+		userQuote.put("text", quoteText.getText().toString());
+		userQuote.put("season", "".equals(seasonText.getText().toString()) ? "" : seasonText.getText().toString());
+		userQuote.put("episode", "".equals(episodeText.getText().toString()) ? "" : episodeText.getText().toString());
+		userQuote.put("language", languageSpinner.getSelectedItemPosition());
+		userQuote.put("user", User.getInstance().getName());
+		userQuote.put("type", 0);
+		userQuote.saveInBackground(new SaveCallback() {
 
-				@Override
-				public void done(ParseException e) {
-					myProgressDialog.dismiss();
-					if (e == null)
-						showSuccessDialog();
-					else
-						showErrorDialog();
-				}
-			});
-		} else {
-			startActivity(new Intent(NewQuoteScreen.this, AuthScreen.class));
-		}
+			@Override
+			public void done(ParseException e) {
+				myProgressDialog.dismiss();
+				if (e == null)
+					showSuccessDialog();
+				else
+					showErrorDialog(e);
+			}
+		});
 	}
 
-	private void showErrorDialog() {
+	private void showErrorDialog(ParseException e) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.user_quote_failed_title);
-		builder.setMessage(R.string.connection_check_text);
+		builder.setMessage(getString(R.string.connection_check_text) + " Error: "+ e.getLocalizedMessage());
 		builder.setIcon(R.drawable.ic_launcher);
 		builder.setCancelable(true);
 		builder.show();

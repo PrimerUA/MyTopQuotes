@@ -35,6 +35,8 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 
 	private ImageView authImage;
 	private LinearLayout authLayout;
+	
+	private ProgressDialog myProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 	}
 
 	private void initScreen() {
+		myProgressDialog = new ProgressDialog(this);
 		authImage = (ImageView) findViewById(R.id.auth_image);
 		authLayout = (LinearLayout) findViewById(R.id.auth_layout);
 
@@ -64,11 +67,13 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 				result.startResolutionForResult((Activity) this, REQUEST_CODE_RESOLVE_ERR);
 				authImage.setVisibility(View.GONE);
 				authLayout.setBackgroundResource(R.drawable.w1);
+				myProgressDialog.dismiss();
 			} catch (IntentSender.SendIntentException e) {
 				plusClient.connect();
 			}
 		} else {
 			Toast.makeText(this, "Connection failed. Error code: " + result.getErrorCode(), Toast.LENGTH_SHORT).show();
+			myProgressDialog.dismiss();
 		}
 	}
 
@@ -80,8 +85,8 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 		User.getInstance().setEmail(plusClient.getAccountName());
 
 		ParseUser user = new ParseUser();
-		user.setUsername(plusClient.getCurrentPerson().getDisplayName());
-		user.setEmail(plusClient.getAccountName());
+		user.setUsername(User.getInstance().getName());
+		user.setEmail(User.getInstance().getEmail());
 		user.setPassword("pass");
 		user.signUpInBackground(new SignUpCallback() {
 			public void done(ParseException e) {
@@ -90,7 +95,7 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 					public void done(ParseUser user, ParseException e) {
 						if (e == null) {
 							User.getInstance().setLoggedIn(true);
-							PreferencesLoader.saveUserData();
+							PreferencesLoader.getInstance().saveUserData();
 							finish();
 						} else {
 							AlertDialog.Builder builder = new AlertDialog.Builder(AuthScreen.this);
@@ -100,6 +105,7 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 							builder.setCancelable(true);
 							builder.show();
 						}
+						myProgressDialog.dismiss();
 					}
 				});
 			}
@@ -109,12 +115,14 @@ public class AuthScreen extends SherlockActivity implements OnClickListener, Goo
 	@Override
 	public void onDisconnected() {
 		Toast.makeText(this, getString(R.string.google_disconnected), Toast.LENGTH_SHORT).show();
+		myProgressDialog.dismiss();
 	}
 
 	@Override
 	public void onClick(View v) {
 		if (!plusClient.isConnected()) {
 			plusClient.connect();
+			myProgressDialog = ProgressDialog.show(AuthScreen.this, getString(R.string.connection), getString(R.string.connection_auth), true);
 		}
 	}
 

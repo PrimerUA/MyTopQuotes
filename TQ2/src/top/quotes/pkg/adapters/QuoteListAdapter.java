@@ -64,9 +64,9 @@ public class QuoteListAdapter extends BaseAdapter {
 		ImageButton shareButton = (ImageButton) view.findViewById(R.id.DailyQuote_shareButton);
 		LinearLayout contentLayout = (LinearLayout) view.findViewById(R.id.DailyQuote_contentLayout);
 
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);

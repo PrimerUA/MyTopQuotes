@@ -189,7 +189,7 @@ public class QuizFragment extends SherlockFragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			quote.setBackgroundResource(R.drawable.quote_border_pink);
 			answersLayout.setBackgroundResource(R.drawable.quote_border_pink);
 			score.setBackgroundResource(R.drawable.quote_border_pink);
@@ -199,7 +199,7 @@ public class QuizFragment extends SherlockFragment implements OnClickListener {
 			secondAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
 			thirdAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
 			fourthAnswer.setBackgroundResource(R.drawable.quote_selector_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			quote.setBackgroundResource(R.drawable.quote_border_white);
 			answersLayout.setBackgroundResource(R.drawable.quote_border_white);
 			drawerImage.setBackgroundColor(Color.DKGRAY);

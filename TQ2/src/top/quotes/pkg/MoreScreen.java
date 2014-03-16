@@ -13,13 +13,12 @@ import android.widget.LinearLayout;
 public class MoreScreen extends Activity {
 
 	private LinearLayout truthLayout;
-	private LinearLayout vitacodeLayout;
 	private LinearLayout quarterLayout;
 	private LinearLayout blogLayout;
 	private LinearLayout vkLayout;
 	private LinearLayout brainLayout;
 	private LinearLayout archangelLayout;
-	private LinearLayout vitasolutionLayout;
+	private LinearLayout cartoonLayout;
 
 	private LinearLayout contentLayout;
 	private Button vkButton;
@@ -36,13 +35,12 @@ public class MoreScreen extends Activity {
 		contentLayout = (LinearLayout) findViewById(R.id.MoreScreen_contentLayout);
 
 		truthLayout = (LinearLayout) findViewById(R.id.MoreScreen_truthLayout);
-		vitacodeLayout = (LinearLayout) findViewById(R.id.MoreScreen_vitacodeLayout);
 		quarterLayout = (LinearLayout) findViewById(R.id.MoreScreen_quarterLayout);
 		blogLayout = (LinearLayout) findViewById(R.id.MoreScreen_blogLayout);
 		vkLayout = (LinearLayout) findViewById(R.id.MoreScreen_vkLayout);
 		brainLayout = (LinearLayout) findViewById(R.id.MoreScreen_brainLayout);
 		archangelLayout = (LinearLayout) findViewById(R.id.MoreScreen_archangelLayout);
-		vitasolutionLayout = (LinearLayout) findViewById(R.id.MoreScreen_vitasolutionLayout);
+		cartoonLayout = (LinearLayout) findViewById(R.id.MoreScreen_cartoonLayout);
 		
 		vkButton = (Button) findViewById(R.id.MoreScreen_vkButton);
 
@@ -61,19 +59,11 @@ public class MoreScreen extends Activity {
 			}
 		});
 
-		vitacodeLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				visitUrl("https://play.google.com/store/apps/details?id=com.softvit.vitacall");
-			}
-		});
-
 		quarterLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				visitUrl("https://play.google.com/store/apps/details?id=pro.top.comic.pkg");
+				visitUrl("https://play.google.com/store/apps/details?id=top.comic.pkg");
 			}
 		});
 
@@ -101,11 +91,11 @@ public class MoreScreen extends Activity {
 			}
 		});
 		
-		vitasolutionLayout.setOnClickListener(new OnClickListener() {
+		cartoonLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				visitUrl("https://play.google.com/store/apps/details?id=com.primerworldapps.vitasolution");
+				visitUrl("https://play.google.com/store/apps/details?id=com.skylion.cartoon");
 			}
 		});
 		
@@ -117,9 +107,9 @@ public class MoreScreen extends Activity {
 			}
 		});
 
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);

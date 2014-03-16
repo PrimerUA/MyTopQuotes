@@ -42,7 +42,7 @@ public class NewsScreen extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				visitUrl("https://play.google.com/store/apps/details?id=com.primerworldapps.vitasolution");
+				visitUrl("https://play.google.com/store/apps/details?id=com.skylion.cartoon");
 			}
 		});
 		
@@ -56,9 +56,9 @@ public class NewsScreen extends Activity {
 		});
 		
 		
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);

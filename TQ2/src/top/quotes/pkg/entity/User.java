@@ -6,7 +6,6 @@ public class User {
 	private String email;
 	private boolean loggedIn = false;
 	private static User instance = null;
-	private int id = -1;
 
 	public static User getInstance() {
 		if (instance == null)
@@ -31,14 +30,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public boolean isLoggedIn() {

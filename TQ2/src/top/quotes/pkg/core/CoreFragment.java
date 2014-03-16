@@ -7,34 +7,34 @@ import top.quotes.pkg.util.controllers.LanguageController;
 
 public abstract class CoreFragment extends SherlockFragment {
 
-    private int currentTheme;
+	private int currentTheme;
 
-    protected abstract void initFragment();
+	protected abstract void initFragment();
 
-    protected abstract void addQuotesOnScreen();
+	protected abstract void addQuotesOnScreen();
 
-    protected abstract void updateContent();
+	protected abstract void updateContent();
 
-    @Override
-    public void onPause() {
-	super.onPause();
-	currentTheme = getTheme();
-    }
-
-    @Override
-    public void onResume() {
-	super.onResume();
-	if (currentTheme != getTheme()) {
-	    updateContent();
+	@Override
+	public void onPause() {
+		super.onPause();
+		currentTheme = getTheme();
 	}
-    }
 
-    public LanguageController getLanguage() {
-	return LanguageController.getCurrentLanguage();
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (currentTheme != getTheme()) {
+			updateContent();
+		}
+	}
 
-    public int getTheme() {
-	return PreferencesLoader.getTheme();
-    }
+	public LanguageController getLanguage() {
+		return LanguageController.getCurrentLanguage();
+	}
+
+	public int getTheme() {
+		return PreferencesLoader.getInstance().getTheme();
+	}
 
 }

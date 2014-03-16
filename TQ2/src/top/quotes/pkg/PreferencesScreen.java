@@ -57,9 +57,9 @@ public class PreferencesScreen extends SherlockActivity implements OnCheckedChan
 	}
 
 	private void loadPreferencesOnScreen() {
-		LanguageController language = PreferencesLoader.getLanguage();
-		int theme = PreferencesLoader.getTheme();
-		Boolean daily = PreferencesLoader.isDaily();
+		LanguageController language = PreferencesLoader.getInstance().getLanguage();
+		int theme = PreferencesLoader.getInstance().getTheme();
+		Boolean daily = PreferencesLoader.getInstance().isDaily();
 
 		if (language == LanguageController.RUS) {
 			languageRusRadio.setChecked(true);
@@ -109,13 +109,13 @@ public class PreferencesScreen extends SherlockActivity implements OnCheckedChan
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (themePinkRadio.isChecked()) {
-					PreferencesLoader.setTheme(0);
+					PreferencesLoader.getInstance().setTheme(0);
 					contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
 				} else if (themeWhiteRadio.isChecked()) {
-					PreferencesLoader.setTheme(1);
+					PreferencesLoader.getInstance().setTheme(1);
 					contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 				} else {
-					PreferencesLoader.setTheme(2);
+					PreferencesLoader.getInstance().setTheme(2);
 					contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
 				}
 			}
@@ -129,9 +129,9 @@ public class PreferencesScreen extends SherlockActivity implements OnCheckedChan
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (languageRusRadio.isChecked()) {
-					PreferencesLoader.setLanguage(LanguageController.RUS);
+					PreferencesLoader.getInstance().setLanguage(LanguageController.RUS);
 				} else {
-					PreferencesLoader.setLanguage(LanguageController.ENG);
+					PreferencesLoader.getInstance().setLanguage(LanguageController.ENG);
 				}
 			}
 		};
@@ -186,7 +186,7 @@ public class PreferencesScreen extends SherlockActivity implements OnCheckedChan
 
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		PreferencesLoader.setDaily(isChecked);
+		PreferencesLoader.getInstance().setDaily(isChecked);
 	}
 
 	@Override

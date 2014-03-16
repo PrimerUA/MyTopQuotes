@@ -80,9 +80,9 @@ public class ScoresScreen extends Activity {
 			}
 		});
 
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			backgroundLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			backgroundLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			backgroundLayout.setBackgroundResource(R.drawable.quote_border_orange);

@@ -60,9 +60,9 @@ public class UserQuoteListAdapter extends BaseAdapter {
 		ImageButton shareButton = (ImageButton) view.findViewById(R.id.UserQuote_shareButton);
 		LinearLayout contentLayout = (LinearLayout) view.findViewById(R.id.UserQuote_contentLayout);
 
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_pink);
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_white);
 		} else {
 			contentLayout.setBackgroundResource(R.drawable.quote_border_orange);
@@ -71,9 +71,8 @@ public class UserQuoteListAdapter extends BaseAdapter {
 		final ParseObject quote = quotesList.get(position);
 		quoteText.setText(quote.get("text").toString());
 		showTitle.setText(quote.get("title").toString());
-		
-		int season = (Integer) quote.get("season");
-		int episode = (Integer) quote.get("episode");
+		int season = Integer.parseInt(("".equals(quote.get("season").toString()) ? "0" : quote.get("season").toString()));
+		int episode = Integer.parseInt(("".equals(quote.get("episode").toString()) ? "0" : quote.get("episode").toString()));
 		if (season == 0) {
 			seasonEpisodeText.setVisibility(View.VISIBLE);
 			seasonEpisodeText.setText(context.getString(R.string.quote_episode) + " " + episode);

@@ -136,7 +136,7 @@
     <string name="more_95q">95 Quarter</string>
     <string name="more_vk">Android [VK group]</string>
     <string name="more_blog">Visit my blog</string>
-    <string name="more_archangel">Archangel Web Studio</string>
+    <string name="more_archangel">Arhangel Web Studio</string>
     <string name="more_vitasolution">VitaSolution</string>
     <string name="more_archangel_text">Starting your own business? You need a site for that! Refer to professional</string>
     <string name="more_vitasolution_text">Cash your knowledge - earn money by helping others solve their issues</string>
@@ -191,14 +191,15 @@
     <string name="connection">Connecting</string>
     <string name="connection_posting_quote">Posting quote to database...</string>
     <string name="connection_loading_quote">Loading quotes...</string>
+    <string name="connection_auth">Authorizing...</string>
     <string name="quote_season">Season</string>
     <string name="quote_episode">Episode</string>
     <string name="quote_by">by</string>
     <string name="all_items_loaded">End of list</string>
     <string name="news_screen_title">New in this version</string>
-    <string name="news_screen_text">You can now add your quotes to the Quotes streamт! Simply tap Add user quote button and fill in required fields. This function requires internet connection</string>
-    <string name="news_screen_block_1">Our brand new project</string>
-    <string name="news_screen_text_block_1">VitaSolution - is an innovative way to earn REAL money by simply helping other people solve their issues. Tap this message to start it right now</string>
+    <string name="news_screen_text">You can now add your quotes to the Quotes stream! Simply tap Add user quote button and fill in required fields. This function requires internet connection</string>
+    <string name="news_screen_block_1">More quotes</string>
+    <string name="news_screen_text_block_1">Cartoon Quotes - read quotes from your favourite cartoons offline, play quote Quizz and add new quotes by yourself!</string>
     <string name="news_screen_block_2">Join Top Quotes on Vk.com</string>
     <string name="news_screen_text_block_2">We are now available on Vk social network. All your quotes will be shown here as well as in the Quote stream</string>
 <string name="loggined_as">Logged in as:</string>

@@ -39,6 +39,7 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 public class MainScreen extends SherlockFragmentActivity {
 
@@ -61,7 +62,7 @@ public class MainScreen extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_screen);
 
-		PreferencesLoader.initPrefs(this);
+		PreferencesLoader.getInstance().initPrefs(this);
 		QuoteRatingsProvider.initRatings(this);
 		ShowsList.initShows(this);
 		DailyNotificationController.initNotification(this);
@@ -73,7 +74,6 @@ public class MainScreen extends SherlockFragmentActivity {
 		ParseAnalytics.trackAppOpened(getIntent());
 
 		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new MainFragment()).commit();
-
 
 		adView = new AdView(this, AdSize.SMART_BANNER, getString(R.string.admob_publisher_id));
 		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
@@ -98,7 +98,7 @@ public class MainScreen extends SherlockFragmentActivity {
 			startActivity(new Intent(this, WelcomeScreen.class));
 		}
 
-		if (!User.getInstance().isLoggedIn() && ConnectionProvider.isConnectionAvailable(this)) {
+		if ((!User.getInstance().isLoggedIn() || ParseUser.getCurrentUser() == null) && ConnectionProvider.isConnectionAvailable(this)) {
 			startActivity(new Intent(this, AuthScreen.class));
 		}
 	}
@@ -268,9 +268,9 @@ public class MainScreen extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (PreferencesLoader.getTheme() == 0) {
+		if (PreferencesLoader.getInstance().getTheme() == 0) {
 			mDrawerList.setBackgroundColor(Color.parseColor("#b40066"));
-		} else if (PreferencesLoader.getTheme() == 1) {
+		} else if (PreferencesLoader.getInstance().getTheme() == 1) {
 			mDrawerList.setBackgroundColor(Color.parseColor("#919191"));
 		} else {
 			mDrawerList.setBackgroundColor(Color.parseColor("#ff7400"));
