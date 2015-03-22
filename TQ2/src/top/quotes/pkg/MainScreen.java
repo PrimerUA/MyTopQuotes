@@ -20,6 +20,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
@@ -29,19 +30,10 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
-public class MainScreen extends SherlockFragmentActivity {
+public class MainScreen extends FragmentActivity {
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -50,8 +42,6 @@ public class MainScreen extends SherlockFragmentActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 	private String[] mShowsTitles;
-
-	private AdView adView;
 
 	private static int selectedItem;
 
@@ -71,14 +61,10 @@ public class MainScreen extends SherlockFragmentActivity {
 		setDrawerPanel(savedInstanceState);
 		setActionBar();
 		
-		ParseAnalytics.trackAppOpened(getIntent());
+		ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 		getSupportFragmentManager().beginTransaction().add(R.id.content_frame, new MainFragment()).commit();
 
-		adView = new AdView(this, AdSize.SMART_BANNER, getString(R.string.admob_publisher_id));
-		((LinearLayout) findViewById(R.id.content_frame)).addView(adView);
-		adView.loadAd(new AdRequest());
-		
 		SharedPreferences.Editor editor = prefs.edit();
 		try {
 			int currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
@@ -275,12 +261,6 @@ public class MainScreen extends SherlockFragmentActivity {
 		} else {
 			mDrawerList.setBackgroundColor(Color.parseColor("#ff7400"));
 		}
-	}
-
-	@Override
-	public void onDestroy() {
-		adView.destroy();
-		super.onDestroy();
 	}
 
 	@Override
